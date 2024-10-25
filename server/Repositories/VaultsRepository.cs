@@ -40,6 +40,24 @@ public class VaultsRepository
     return vault;
   }
 
+  internal Vault GetVaultById(int vaultId)
+  {
+    string sql = @"
+        SELECT
+          vaults.*,
+          accounts.*
+        FROM
+          vaults
+          JOIN accounts on accounts.id = vaults.creatorId
+        WHERE vaults.id = @vaultId;";
+
+    Vault vaults = _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+    {
+      vault.Creator = profile;
+      return vault;
+    }, new { vaultId }).FirstOrDefault();
+    return vaults;
+  }
 
 }
 

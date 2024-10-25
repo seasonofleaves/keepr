@@ -15,4 +15,15 @@ public class VaultsService
     Vault vault = _repository.Createvault(vaultData, userInfo.Id);
     return vault;
   }
+
+  public Vault GetVaultById(int vaultId)
+  {
+    Vault vault = _repository.GetVaultById(vaultId);
+    if (vault == null)
+    {
+      throw new Exception($"Invalid vault id: {vaultId}");
+    }
+    return vault;
+  }
+
 }

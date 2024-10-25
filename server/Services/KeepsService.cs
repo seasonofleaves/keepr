@@ -11,6 +11,12 @@ public class KeepsService
   }
   private readonly KeepsRepository _repository;
 
+  internal Keep CreateKeep(KeepCreationDTO keepData, Account userInfo)
+  {
+    Keep keep = _repository.CreateKeep(keepData, userInfo.Id);
+    return keep;
+  }
+
   internal List<Keep> GetAllKeeps()
   {
     List<Keep> keeps = _repository.GetAllKeeps();
@@ -24,12 +30,6 @@ public class KeepsService
     {
       throw new Exception($"Invalid keep id: {keepId}");
     }
-    return keep;
-  }
-
-  internal Keep CreateKeep(KeepCreationDTO keepData, Account userInfo)
-  {
-    Keep keep = _repository.CreateKeep(keepData, userInfo.Id);
     return keep;
   }
 

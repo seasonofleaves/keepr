@@ -59,5 +59,24 @@ public class VaultsRepository
     return vaults;
   }
 
+  internal void UpdateVault(int vaultId, VaultCreationDTO vaultUpdateData)
+  {
+    string sql = @"
+        UPDATE
+          vaults
+        SET
+          name = @Name,
+          isPrivate = @IsPrivate
+        WHERE
+          id = @vaultId
+          LIMIT 1;";
+
+    _db.Execute(sql, new
+    {
+      vaultId,
+      vaultUpdateData.Name,
+      vaultUpdateData.IsPrivate
+    });
+  }
 }
 

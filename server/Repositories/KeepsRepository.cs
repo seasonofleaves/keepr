@@ -43,11 +43,14 @@ public class KeepsRepository
   internal List<Keep> GetAllKeeps()
   {
     string sql = @"
-        SELECT keeps.*, COUNT(keeps.id) AS kept, accounts.*
-FROM keeps
-    JOIN accounts on accounts.id = keeps.creatorId
-GROUP BY
-    keeps.id;";
+        SELECT
+          keeps.*,
+          COUNT(keeps.id) AS kept,
+          accounts.*
+        FROM keeps
+          JOIN accounts on accounts.id = keeps.creatorId
+        GROUP BY
+          keeps.id;";
 
     List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
     {
@@ -61,10 +64,11 @@ GROUP BY
   {
     string sql = @"
         SELECT
-        keeps.*,
-        accounts.*
-        FROM keeps
-        JOIN accounts ON accounts.id = keeps.creatorId
+          keeps.*,
+          accounts.*
+        FROM
+          keeps
+          JOIN accounts ON accounts.id = keeps.creatorId
         WHERE keeps.id = @keepId;";
 
     Keep keep = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
@@ -73,6 +77,26 @@ GROUP BY
       return keep;
     }, new { keepId }).FirstOrDefault();
     return keep;
+  }
+
+  internal void UpdateKeep(int keepId, KeepCreationDTO keepUpdateData)
+  {
+    string sql = @"
+        UPDATE
+          keeps
+        SET
+          name = @Name,
+          description = @Description
+        WHERE
+          id = @keepId
+        LIMIT 1;";
+
+    _db.Execute(sql, new
+    {
+      keepId,
+      keepUpdateData.Name,
+      keepUpdateData.Description
+    });
   }
 }
 

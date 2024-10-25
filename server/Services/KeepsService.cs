@@ -33,4 +33,18 @@ public class KeepsService
     return keep;
   }
 
+  internal Keep UpdateKeep(int keepId, string userId, KeepCreationDTO keepUpdateData)
+  {
+    Keep keep = GetKeepById(keepId);
+    if (keep.CreatorId != userId)
+    {
+      throw new Exception("Not your keep to update!");
+    }
+
+    keep.Name = keepUpdateData.Name ?? keep.Name;
+    keep.Description = keepUpdateData.Description ?? keep.Description;
+
+    _repository.UpdateKeep(keepId, keepUpdateData);
+    return keep;
+  }
 }

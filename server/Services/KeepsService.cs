@@ -1,5 +1,6 @@
 
 
+
 namespace keepr.Services;
 
 public class KeepsService
@@ -16,9 +17,20 @@ public class KeepsService
     return keeps;
   }
 
+  internal Keep GetKeepById(int keepId)
+  {
+    Keep keep = _repository.GetKeepById(keepId);
+    if (keep == null)
+    {
+      throw new Exception($"Invalid keep id: {keepId}");
+    }
+    return keep;
+  }
+
   internal Keep CreateKeep(KeepCreationDTO keepData, Account userInfo)
   {
     Keep keep = _repository.CreateKeep(keepData, userInfo.Id);
     return keep;
   }
+
 }

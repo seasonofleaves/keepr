@@ -56,5 +56,23 @@ GROUP BY
     }).ToList();
     return keeps;
   }
+
+  internal Keep GetKeepById(int keepId)
+  {
+    string sql = @"
+        SELECT
+        keeps.*,
+        accounts.*
+        FROM keeps
+        JOIN accounts ON accounts.id = keeps.creatorId
+        WHERE keeps.id = @keepId;";
+
+    Keep keep = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+    {
+      keep.Creator = profile;
+      return keep;
+    }, new { keepId }).FirstOrDefault();
+    return keep;
+  }
 }
 

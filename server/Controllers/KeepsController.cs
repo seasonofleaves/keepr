@@ -27,6 +27,20 @@ public class KeepsController : ControllerBase
     }
   }
 
+  [HttpGet("{keepId}")]
+  public ActionResult<Keep> GetKeepById(int keepId)
+  {
+    try
+    {
+      Keep keep = _keepsService.GetKeepById(keepId);
+      return Ok(keep);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
+
   [Authorize]
   [HttpPost]
   public async Task<ActionResult<Keep>> CreateKeep([FromBody] KeepCreationDTO keepData)

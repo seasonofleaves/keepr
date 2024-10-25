@@ -10,7 +10,7 @@ public class VaultCreationDTO
   [MaxLength(1000)]
   public string Description { get; set; }
   [MaxLength(1000)]
-  public string ImgUrl { get; set; }
+  public string Img { get; set; }
 }
 
 // RETURN OBJECT
@@ -21,7 +21,7 @@ public class Vault : IRepoItem<int>
   public DateTime UpdatedAt { get; set; }
   public string Name { get; set; }
   public string Description { get; set; }
-  public string ImgUrl { get; set; }
+  public string Img { get; set; }
   public bool IsPrivate { get; set; }
 
   // RELATIONSHIP PROPERTIES

@@ -78,5 +78,21 @@ public class VaultsRepository
       vaultUpdateData.IsPrivate
     });
   }
+
+  internal void DeleteVault(int vaultId)
+  {
+    string sql = "DELETE FROM vaults WHERE id = @vaultId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { vaultId });
+
+    if (rowsAffected == 0)
+    {
+      throw new Exception("No vaults were deleted!");
+    }
+    if (rowsAffected > 1)
+    {
+      throw new Exception($"{rowsAffected} vaults were delted!");
+    }
+  }
 }
 

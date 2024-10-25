@@ -1,4 +1,5 @@
 
+
 namespace keepr.Services;
 
 public class KeepsService
@@ -8,6 +9,12 @@ public class KeepsService
     _repository = repository;
   }
   private readonly KeepsRepository _repository;
+
+  internal List<Keep> GetAllKeeps()
+  {
+    List<Keep> keeps = _repository.GetAllKeeps();
+    return keeps;
+  }
 
   internal Keep CreateKeep(KeepCreationDTO keepData, Account userInfo)
   {

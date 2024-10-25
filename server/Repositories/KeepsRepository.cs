@@ -39,5 +39,22 @@ public class KeepsRepository
     }).FirstOrDefault();
     return keep;
   }
+
+  internal List<Keep> GetAllKeeps()
+  {
+    string sql = @"
+        SELECT keeps.*, COUNT(keeps.id) AS kept, accounts.*
+FROM keeps
+    JOIN accounts on accounts.id = keeps.creatorId
+GROUP BY
+    keeps.id;";
+
+    List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+    {
+      keep.Creator = profile;
+      return keep;
+    }).ToList();
+    return keeps;
+  }
 }
 

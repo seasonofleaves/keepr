@@ -72,4 +72,22 @@ public class KeepsController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  [Authorize]
+  [HttpDelete("{keepId}")]
+
+  // string for hard delete, whole object (Keep) for soft delete/to update the data
+  public async Task<ActionResult<string>> DeleteKeep(int keepId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      string message = _keepsService.DeleteKeep(keepId, userInfo.Id);
+      return Ok(message);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }

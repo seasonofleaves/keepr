@@ -98,5 +98,21 @@ public class KeepsRepository
       keepUpdateData.Description
     });
   }
+
+  internal void DeleteKeep(int keepId)
+  {
+    string sql = "DELETE FROM keeps WHERE id = @keepId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { keepId });
+
+    if (rowsAffected == 0)
+    {
+      throw new Exception("No keeps were deleted!");
+    }
+    if (rowsAffected > 1)
+    {
+      throw new Exception($"{rowsAffected} keeps were delted!");
+    }
+  }
 }
 

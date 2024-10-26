@@ -2,6 +2,7 @@
 
 
 
+
 namespace keepr.Services;
 
 public class VaultKeepsService
@@ -17,4 +18,10 @@ public class VaultKeepsService
     VaultKeep vaultKeep = _repository.CreateVaultKeep(vaultKeepData);
     return vaultKeep;
   }
+
+    // internal List<VaultKeep> GetKeepsInPublicVault(int vaultId, string userId)
+    // {
+    //     VaultKeep vaultKeep = _repository.GetKeepsInPublicVault(vaultId, userId);
+    //     return vaultKeep;
+    // }
 }

@@ -1,4 +1,22 @@
 <script setup>
+import { keepsService } from '@/services/KeepsService.js';
+import { logger } from '@/utils/Logger.js';
+import Pop from '@/utils/Pop.js';
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  getAllKeeps()
+})
+
+async function getAllKeeps(){
+  try {
+    await keepsService.getAllKeeps()
+  }
+  catch (error){
+    Pop.error(error)
+    logger.log(error)
+  }
+}
 
 </script>
 

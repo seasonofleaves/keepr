@@ -20,7 +20,7 @@ function setActiveKeep(){
     <img class="img-fluid" :src="props.keep.img" :alt="props.keep.name" :title="props.keep.name">
     <div class="card-img-overlay d-flex align-items-end justify-content-between">
       <p class="card-text fs-5 m-0">{{ props.keep.name }}</p>
-      <img class="avatar shadow" :src="props.keep.creator.picture" :alt="props.keep.creator.name">
+      <img class="avatar shadow" :title="props.keep.creator.name" :src="props.keep.creator.picture" :alt="props.keep.creator.name">
     </div>
   </div>
 

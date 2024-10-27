@@ -15,15 +15,14 @@ function setActiveKeep(){
 
 
 <template>
+
   <div @click="setActiveKeep()" class="card text-bg-dark">
-    <img class="img-fluid" :src="keep.img" :alt="keep.name" :title="keep.name">
+    <img class="img-fluid" :src="props.keep.img" :alt="props.keep.name" :title="props.keep.name">
     <div class="card-img-overlay d-flex align-items-end justify-content-between">
-      <p class="card-text fs-5 m-0">{{ keep.name }}</p>
-      <img class="avatar shadow" :src="keep.creator.picture" :alt="keep.creator.name">
+      <p class="card-text fs-5 m-0">{{ props.keep.name }}</p>
+      <img class="avatar shadow" :src="props.keep.creator.picture" :alt="props.keep.creator.name">
     </div>
   </div>
-
-  
 
 </template>
 

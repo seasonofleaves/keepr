@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import KeepCard from '@/components/KeepCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
@@ -26,31 +27,32 @@ async function getAllKeeps(){
 <template>
   <div class="container-fluid">
     <section class="row">
-      <div v-for="keep in keeps" :key="keep.id" class="col-12">
-        {{ keep }}
+      <div class="col-12">
+        <div class="masonry-layout">
+          <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
+            <KeepCard :keep="keep"/>
+          </div>
+        </div>
       </div>
     </section>
   </div>
 </template>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
+.masonry-layout {
+  column-count: 4;
+  column-gap: 1rem;
+  width: 100%;
+}
 
-  .home-card {
-    width: clamp(500px, 50vw, 100%);
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
 
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
+@media (max-width: 480px) {
+  .masonry-layout {
+    column-count: 2;
   }
 }
 </style>

@@ -21,7 +21,7 @@ defineProps({ modalId: String })
 <style lang="scss" scoped>
 
 .modal{
-  --bs-modal-border-radius: 0;
+  // --bs-modal-border-radius: 0;
 }
 
 </style>

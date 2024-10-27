@@ -34,9 +34,16 @@ p{
 }
 
 .card{
-  --bs-card-border-radius: unset;
+  // --bs-card-border-radius: unset;
   border: none;
   box-shadow: 1px 1px 10px rgb(67, 67, 67);
+}
+
+img{
+  // object-fit: cover;
+  // object-position: center;
+  border-radius: 5px;
+  // border-end-start-radius: 6px;
 }
 
 .avatar {

@@ -15,7 +15,7 @@ function setActiveKeep(){
 
 
 <template>
-  <div class="card text-bg-dark">
+  <div @click="setActiveKeep()" class="card text-bg-dark">
     <img class="img-fluid" :src="keep.img" :alt="keep.name" :title="keep.name">
     <div class="card-img-overlay d-flex align-items-end justify-content-between">
       <p class="card-text fs-5 m-0">{{ keep.name }}</p>

@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import ModalWrapper from './ModalWrapper.vue';
+import KeepForm from './KeepForm.vue';
 
 const theme = ref(loadState('theme') || 'light')
 
@@ -18,6 +20,9 @@ function toggleTheme() {
 </script>
 
 <template>
+  <ModalWrapper id="keep-form">
+    <KeepForm />
+  </ModalWrapper>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
@@ -34,6 +39,19 @@ function toggleTheme() {
           <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
             About
           </router-link>
+        </li>
+        <li>
+          <div class="dropdown">
+            <button class="btn text-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Create
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div data-bs-toggle="modal" data-bs-target="#keep-form">
+                <a class="dropdown-item" href="#">Keep</a>
+              </div>
+              <a class="dropdown-item" href="#">Vault</a>
+            </div>
+          </div>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->

@@ -69,3 +69,15 @@ async function getAllKeeps(){
   }
 }
 </style>
+
+<style>
+
+#keep-details .modal-body{
+  padding: 0;
+}
+
+#keep-details .modal{
+  border-radius: 0;
+}
+
+</style>

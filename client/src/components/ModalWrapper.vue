@@ -22,7 +22,6 @@ defineProps({ modalId: String })
 
 .modal{
   --bs-modal-border-radius: 0;
-  height: 80vh;
 }
 
 </style>

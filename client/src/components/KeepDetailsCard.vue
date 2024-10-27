@@ -28,7 +28,7 @@ defineProps({
         <div class="col-12 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
             <div class="dropdown">
-              <button class="btn dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                Vault
              </button>
              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -37,11 +37,11 @@ defineProps({
                 <a class="dropdown-item" href="#">Something else here</a>
              </div>
             </div>
-            <button class="btn btn-success">save</button>
+            <button class="btn btn-success mx-2">save</button>
           </div>
           <div class="d-flex align-items-center">
-            <img class="avatar shadow" :src="activeKeep.creator.picture" :alt="activeKeep.creator.name">
-            <p class="mb-0 mx-2">{{ activeKeep.creator.name }}</p>
+            <img class="avatar shadow mx-2" :src="activeKeep.creator.picture" :alt="activeKeep.creator.name">
+            <p class="mb-0 text-break text-wrap">{{ activeKeep.creator.name }}</p>
           </div>
           </div>
       </div>

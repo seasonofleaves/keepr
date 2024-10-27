@@ -4,6 +4,7 @@ import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import ModalWrapper from './ModalWrapper.vue';
 import KeepForm from './KeepForm.vue';
+import VaultForm from './VaultForm.vue';
 
 const theme = ref(loadState('theme') || 'light')
 
@@ -22,6 +23,9 @@ function toggleTheme() {
 <template>
   <ModalWrapper id="keep-form">
     <KeepForm />
+  </ModalWrapper>
+  <ModalWrapper id="vault-form">
+    <VaultForm />
   </ModalWrapper>
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
@@ -49,7 +53,9 @@ function toggleTheme() {
               <div data-bs-toggle="modal" data-bs-target="#keep-form">
                 <a class="dropdown-item" href="#">Keep</a>
               </div>
-              <a class="dropdown-item" href="#">Vault</a>
+              <div data-bs-toggle="modal" data-bs-target="#vault-form">
+                <a class="dropdown-item" href="#">Vault</a>
+              </div>
             </div>
           </div>
         </li>

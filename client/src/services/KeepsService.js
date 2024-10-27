@@ -4,6 +4,12 @@ import { Keep } from "@/models/Keep.js"
 import { AppState } from "@/AppState.js"
 
 class KeepsService{
+  async createKeep(keepData) {
+    const response = await api.post('api/keeps', keepData)
+    logger.log('Created keep', response.data)
+    const newKeep = new Keep(response.data)
+    AppState.keeps.push(newKeep)
+  }
   setActiveKeep(keep) {
     AppState.activeKeep = null
     AppState.activeKeep = keep

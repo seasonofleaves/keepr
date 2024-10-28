@@ -46,4 +46,19 @@ public class AccountController : ControllerBase
     }
   }
 
+  [Authorize]
+  [HttpPut]
+  public async Task<ActionResult<Profile>> UpdateMyProfile([FromBody] Profile profileUpdateData)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Profile profile = _accountService.UpdateMyProfile(profileUpdateData, userInfo);
+      return Ok(profile);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }

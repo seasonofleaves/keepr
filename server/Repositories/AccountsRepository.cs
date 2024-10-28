@@ -1,3 +1,4 @@
+
 namespace keepr.Repositories;
 
 public class AccountsRepository
@@ -42,6 +43,32 @@ public class AccountsRepository
             WHERE id = @Id;";
     _db.Execute(sql, update);
     return update;
+  }
+
+  internal Profile UpdateMyProfile(string userId, Profile profileUpdateData)
+  {
+    string sql = @"
+        UPDATE
+          accounts
+        SET
+          name = @Name,
+          picture = @Picture,
+          coverImg = @CoverImg
+        WHERE
+          id = @userId
+        LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new
+    {
+      userId,
+      profileUpdateData.Name,
+      profileUpdateData.Picture,
+      profileUpdateData.CoverImg
+    });
+
+    if (rowsAffected == 0) throw new Exception("No profiles were updated!");
+    if (rowsAffected > 1) throw new Exception($"{rowsAffected} profiles were updated!");
+    return profileUpdateData;
   }
 }
 

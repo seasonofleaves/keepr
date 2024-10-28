@@ -36,4 +36,13 @@ public class AccountService
     original.Picture = editData.Picture ?? editData.Picture;
     return _repo.Edit(original);
   }
+
+  internal Profile UpdateMyProfile(Profile profileUpdateData, Account userInfo)
+  {
+    Profile profile = _repo.UpdateMyProfile(userInfo.Id, profileUpdateData);
+    profile.Name = profileUpdateData.Name ?? profile.Name;
+    profile.Picture = profileUpdateData.Picture ?? profile.Picture;
+    profile.CoverImg = profileUpdateData.CoverImg ?? profile.CoverImg;
+    return profile;
+  }
 }

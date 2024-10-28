@@ -4,6 +4,7 @@ import { Keep } from '@/models/Keep.js';
 import { keepsService } from '@/services/KeepsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
+import { Modal } from 'bootstrap';
 import { computed } from 'vue';
 
 const account = computed(() => AppState.account)
@@ -13,9 +14,16 @@ const props = defineProps({
 })
 
 async function setActiveKeep(){
-  keepsService.setActiveKeep(props.keep)
-  await keepsService.getKeepById(props.keep.id)
-  // open modal
+  try {
+    keepsService.setActiveKeep(props.keep)
+    await keepsService.getKeepById(props.keep.id)
+    // open modal
+    Modal.getOrCreateInstance('#keep-details').show()
+  }
+  catch (error){
+    Pop.error(error)
+    logger.log(error)
+  }
 }
 
 async function deleteKeep(){
@@ -37,7 +45,7 @@ async function deleteKeep(){
     <img class="img-fluid" :src="props.keep.img" :alt="props.keep.name" :title="props.keep.name">
     <div class="card-img-overlay d-flex flex-column justify-content-between">
       <div class="d-flex justify-content-end">
-        <i v-if="props.keep.creatorId == account?.id" @click="deleteKeep()" type="button" class="mdi mdi-close-circle text-danger fs-5"></i>
+        <i v-if="props.keep.creatorId == account?.id" @click.stop="deleteKeep()" type="button" class="mdi mdi-close-circle text-danger fs-5"></i>
       </div>
       <div class="d-flex align-items-center justify-content-between">
         <p class="card-text fs-5 m-0">{{ props.keep.name }}</p>

@@ -3,7 +3,6 @@ import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
 import KeepDetailsCard from '@/components/KeepDetailsCard.vue';
 import ModalWrapper from '@/components/ModalWrapper.vue';
-import { Keep } from '@/models/Keep.js';
 import { keepsService } from '@/services/KeepsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
@@ -37,9 +36,7 @@ async function getAllKeeps(){
       <div class="col-12">
         <div class="masonry-layout">
           <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
-            <div  data-bs-toggle="modal" data-bs-target="#keep-details">
               <KeepCard :keep />
-            </div>
           </div>
         </div>
       </div>

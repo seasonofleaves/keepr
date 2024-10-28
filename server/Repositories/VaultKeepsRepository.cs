@@ -1,5 +1,6 @@
 
 
+
 namespace keepr.Repositories;
 
 public class VaultKeepsRepository
@@ -52,5 +53,22 @@ public class VaultKeepsRepository
       vaultId
     }).ToList();
     return keptVaultKeeps;
+  }
+
+  internal KeptVaultKeep GetKeptVaultKeepById(int keptVaultKeepId)
+  {
+    string sql = "SELECT * FROM vault_keeps WHERE id = @keptVaultKeepId;";
+    
+    KeptVaultKeep keptVaultKeep = _db.Query<KeptVaultKeep>(sql, new { keptVaultKeepId }).FirstOrDefault();
+    return keptVaultKeep;
+  }
+
+  internal void DeleteKeptVaultKeepById(int keptVaultKeepId)
+  {
+    string sql = "DELETE FROM vault_keeps WHERE id = @keptVaultKeepId LIMIT 1;";
+    
+    int rowsAffected = _db.Execute(sql, new { keptVaultKeepId });
+    if (rowsAffected == 0) throw new Exception("No kept vault keep deleted.");
+    if (rowsAffected > 1) throw new Exception($"{rowsAffected} kept vault keeps were deleted, please check your sql syntax and do better.");
   }
 }

@@ -29,4 +29,20 @@ public class VaultKeepsController : ControllerBase
       return BadRequest(exception.Message);
     }
   }
+
+  [Authorize]
+  [HttpDelete("{keptVaultKeepId}")]
+  public async Task<ActionResult<string>> DeleteKeptVaultKeep(int keptVaultKeepId)
+  {
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      _vaultKeepsService.DeleteKeptVaultKeep(keptVaultKeepId, userInfo.Id);
+      return Ok("Not longer saving that vault keep.");
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }

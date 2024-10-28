@@ -12,8 +12,10 @@ const props = defineProps({
   keep: {type: Keep, required: true}
 })
 
-function setActiveKeep(){
+async function setActiveKeep(){
   keepsService.setActiveKeep(props.keep)
+  await keepsService.getKeepById(props.keep.id)
+  // open modal
 }
 
 async function deleteKeep(){

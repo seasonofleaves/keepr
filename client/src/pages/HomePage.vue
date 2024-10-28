@@ -16,10 +16,6 @@ onMounted(() => {
   getAllKeeps()
 })
 
-defineProps({
-  keep: {type: Keep, required: true}
-})
-
 async function getAllKeeps(){
   try {
     await keepsService.getAllKeeps()

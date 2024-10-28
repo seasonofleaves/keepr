@@ -5,12 +5,20 @@ import { AppState } from "@/AppState.js"
 import Pop from "@/utils/Pop.js"
 
 class KeepsService{
+  async deleteKeep(keepId, keepName) {
+    const response = await api.delete(`api/keeps/${keepId}`)
+    logger.log('Deleting keep', response.data)
+    const keepIndex = AppState.keeps.findIndex(keep => keep.id == keepId)
+    AppState.keeps.splice(keepIndex, 1)
+    Pop.success(`You deleted keep ${keepName}`)
+  }
+
   async createKeep(keepData) {
     const response = await api.post('api/keeps', keepData)
     logger.log('Created keep', response.data)
     const newKeep = new Keep(response.data)
     AppState.keeps.push(newKeep)
-    Pop.success("You created a keep!")
+    Pop.success(`You created a keep!`)
   }
 
   setActiveKeep(keep) {

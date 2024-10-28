@@ -1,7 +1,12 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Keep } from '@/models/Keep.js';
 import { keepsService } from '@/services/KeepsService.js';
+import { logger } from '@/utils/Logger.js';
+import Pop from '@/utils/Pop.js';
+import { computed } from 'vue';
 
+const account = computed(() => AppState.account)
 
 const props = defineProps({
   keep: {type: Keep, required: true}
@@ -11,23 +16,44 @@ function setActiveKeep(){
   keepsService.setActiveKeep(props.keep)
 }
 
+async function deleteKeep(){
+  try {
+    const wantsToDelete = await Pop.confirm(`Are you sure you want to delete this keep?`)
+    if (!wantsToDelete) return
+    await keepsService.deleteKeep(props.keep.id, props.keep.name)
+  }
+  catch (error){
+    Pop.error(error)
+    logger.log(error)
+  }
+}
 </script>
 
 
 <template>
-
   <div @click="setActiveKeep()" class="card text-bg-dark">
     <img class="img-fluid" :src="props.keep.img" :alt="props.keep.name" :title="props.keep.name">
-    <div class="card-img-overlay d-flex align-items-end justify-content-between">
-      <p class="card-text fs-5 m-0">{{ props.keep.name }}</p>
-      <img class="avatar shadow" :title="props.keep.creator.name" :src="props.keep.creator.picture" :alt="props.keep.creator.name">
+    <div class="card-img-overlay d-flex flex-column justify-content-between">
+      <div class="d-flex justify-content-end">
+        <i v-if="props.keep.creatorId == account?.id" @click="deleteKeep()" type="button" class="mdi mdi-close-circle text-danger fs-5"></i>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <p class="card-text fs-5 m-0">{{ props.keep.name }}</p>
+        <img class="avatar shadow" :title="props.keep.creator.name" :src="props.keep.creator.picture" :alt="props.keep.creator.name">
+      </div>
     </div>
+  
   </div>
 
 </template>
 
 
 <style lang="scss" scoped>
+i{
+  position: relative;
+  bottom: 15px;
+  left: 10px;
+}
 p{
   font-weight: bold;
   text-shadow: 1px 1px 10px rgb(0, 0, 0);

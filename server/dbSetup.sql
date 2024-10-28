@@ -47,8 +47,12 @@ ALTER TABLE accounts ADD COLUMN coverImg TEXT NOT NULL;
 
 INSERT INTO vault_keeps (`vaultId`, `keepId`, `creatorId`) VALUES (2,2, '66f48ffd320bc392ffcdc633') ;
 
-SELECT vault_keeps.*, accounts.*, keeps.*
-FROM
-    vault_keeps
-    JOIN keeps on keeps.id = vault_keeps.keepId --song
-    JOIN accounts ON accounts.id = keeps.creatorId; --musician
+ SELECT
+          accounts.*,
+          keeps.*
+        FROM
+          keeps
+        JOIN
+          accounts on accounts.id = keeps.creatorId
+        WHERE
+          accounts.id = '66f3263a6fbf3fcb53702407';

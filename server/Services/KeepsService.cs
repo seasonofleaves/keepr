@@ -5,11 +5,13 @@ namespace keepr.Services;
 
 public class KeepsService
 {
-  public KeepsService(KeepsRepository repository)
-  {
-    _repository = repository;
-  }
-  private readonly KeepsRepository _repository;
+    public KeepsService(KeepsRepository repository, ProfilesService profilesService)
+    {
+        _repository = repository;
+        _profilesService = profilesService;
+    }
+    private readonly KeepsRepository _repository;
+  private readonly ProfilesService _profilesService;
 
   internal Keep CreateKeep(KeepCreationDTO keepData, Account userInfo)
   {
@@ -58,4 +60,11 @@ public class KeepsService
     _repository.DeleteKeep(keepId);
     return $"{keep.Name} was deleted!";
   }
+
+    internal List<Keep> GetKeepsByProfileId(string profileId, string userId)
+    {
+        Profile profile = _profilesService.GetProfileById(profileId, userId);
+        List<Keep> keeps = _repository.GetKeepsByProfileId(profileId, userId);
+        return keeps;
+    }
 }

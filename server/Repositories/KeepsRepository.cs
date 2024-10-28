@@ -116,5 +116,31 @@ public class KeepsRepository
 
     if (rowsAffected > 1) throw new Exception($"{rowsAffected} keeps were delted!");
   }
+
+  internal List<Keep> GetKeepsByProfileId(string profileId, string userId)
+  {
+    string sql = @"
+        SELECT
+          accounts.*,
+          keeps.*
+        FROM
+          keeps
+        JOIN
+          accounts on accounts.id = keeps.creatorId
+        WHERE
+          accounts.id = @profileId;";
+
+    List<Keep> keeps = _db.Query<Profile, Keep, Keep>(sql, (profile, keep) =>
+    {
+      keep.CreatorId = profile.Id;
+      keep.Creator = profile;
+      return keep;
+    }, new
+    {
+      userId,
+      profileId
+    }).ToList();
+    return keeps;
+  }
 }
 

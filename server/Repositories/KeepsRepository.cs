@@ -91,12 +91,17 @@ public class KeepsRepository
           id = @keepId
         LIMIT 1;";
 
-    _db.Execute(sql, new
+    int rowsAffected = _db.Execute(sql, new
     {
       keepId,
       keepUpdateData.Name,
       keepUpdateData.Description
     });
+
+    if (rowsAffected == 0) throw new Exception("No vaults were updated!");
+
+    if (rowsAffected > 1) throw new Exception($"{rowsAffected} vaults were updated!");
+
   }
 
   internal void DeleteKeep(int keepId)
@@ -105,14 +110,9 @@ public class KeepsRepository
 
     int rowsAffected = _db.Execute(sql, new { keepId });
 
-    if (rowsAffected == 0)
-    {
-      throw new Exception("No keeps were deleted!");
-    }
-    if (rowsAffected > 1)
-    {
-      throw new Exception($"{rowsAffected} keeps were delted!");
-    }
+    if (rowsAffected == 0) throw new Exception("No keeps were deleted!");
+
+    if (rowsAffected > 1) throw new Exception($"{rowsAffected} keeps were delted!");
   }
 }
 

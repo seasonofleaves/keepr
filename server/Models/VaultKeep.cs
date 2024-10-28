@@ -22,4 +22,6 @@ public class VaultKeepProfile : Profile
 public class KeptVaultKeep : Keep
 {
   public int VaultKeepId { get; set; }
+  public int VaultId { get; set; }
+  public string AccountId { get; set; }
 }

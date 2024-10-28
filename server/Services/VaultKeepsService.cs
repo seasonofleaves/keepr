@@ -14,9 +14,11 @@ public class VaultKeepsService
   private readonly VaultKeepsRepository _repository;
   private readonly VaultsService _vaultsService;
 
-  internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
+  internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData, string userId)
   {
+    Vault vault = _vaultsService.GetVaultById(vaultKeepData.VaultId, userId);
     VaultKeep vaultKeep = _repository.CreateVaultKeep(vaultKeepData);
+    if (vault.CreatorId != userId) throw new Exception("You can't create a VaultKeep in this vault!");
     return vaultKeep;
   }
 

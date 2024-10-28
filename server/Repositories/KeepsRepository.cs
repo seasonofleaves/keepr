@@ -63,6 +63,8 @@ public class KeepsRepository
   internal Keep GetKeepById(int keepId)
   {
     string sql = @"
+        UPDATE keeps SET views = views + 1 WHERE keeps.id = @keepId;
+
         SELECT
           keeps.*,
           accounts.*

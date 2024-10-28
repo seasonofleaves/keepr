@@ -12,4 +12,18 @@ public class ProfilesController : ControllerBase
   }
   private readonly Auth0Provider _auth0Provider;
   private readonly ProfilesService _profilesServie;
+
+  [HttpGet("{profileId}")]
+  public async Task<ActionResult<Profile>> GetProfileById(string profileId){
+    try
+    {
+      Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      Profile profile = _profilesServie.GetProfileById(profileId, userInfo?.Id);
+      return Ok(profile);
+    }
+    catch (Exception exception)
+    {
+      return BadRequest(exception.Message);
+    }
+  }
 }

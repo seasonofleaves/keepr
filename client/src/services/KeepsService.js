@@ -2,6 +2,7 @@ import { logger } from "@/utils/Logger.js"
 import { api } from "./AxiosService.js"
 import { Keep } from "@/models/Keep.js"
 import { AppState } from "@/AppState.js"
+import Pop from "@/utils/Pop.js"
 
 class KeepsService{
   async createKeep(keepData) {
@@ -9,11 +10,14 @@ class KeepsService{
     logger.log('Created keep', response.data)
     const newKeep = new Keep(response.data)
     AppState.keeps.push(newKeep)
+    Pop.success("You created a keep!")
   }
+
   setActiveKeep(keep) {
     AppState.activeKeep = null
     AppState.activeKeep = keep
   }
+
   async getAllKeeps() {
     const response = await api.get('api/keeps')
     logger.log('Got all keeps - keeps service', response.data)

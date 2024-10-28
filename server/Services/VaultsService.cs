@@ -72,4 +72,10 @@ public class VaultsService
     List<Vault> vaults = _repository.GetVaultsByProfileId(profileId, userId);
     return vaults;
   }
+
+  internal List<Vault> GetMyVaults(string userId)
+  {
+    List<Vault> vaults = _repository.GetMyVaults(userId);
+    return vaults;
+  }
 }

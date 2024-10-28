@@ -16,7 +16,7 @@ public class VaultsService
     return vault;
   }
 
-  public Vault GetVaultById(int vaultId)
+  private Vault GetVaultById(int vaultId)
   {
     Vault vault = _repository.GetVaultById(vaultId);
     if (vault == null)
@@ -26,9 +26,19 @@ public class VaultsService
     return vault;
   }
 
-  internal Vault UpdateVault(int vaultId, string userId, VaultCreationDTO vaultUpdateData)
+  internal Vault GetVaultById(int vaultId, string userId)
   {
     Vault vault = GetVaultById(vaultId);
+    if (vault.CreatorId != userId && vault.IsPrivate == true)
+    {
+      throw new Exception("Not your vault!");
+    }
+    return vault;
+  }
+
+  internal Vault UpdateVault(int vaultId, string userId, VaultCreationDTO vaultUpdateData)
+  {
+    Vault vault = GetVaultById(vaultId, userId);
     if (vault.CreatorId != userId)
     {
       throw new Exception("Not your vault to update!");
@@ -44,7 +54,7 @@ public class VaultsService
 
   internal string DeleteVault(int vaultId, string userId)
   {
-    Vault vault = GetVaultById(vaultId);
+    Vault vault = GetVaultById(vaultId, userId);
     if (vault.CreatorId != userId)
     {
       throw new Exception("Not your vault to delete!");

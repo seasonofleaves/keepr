@@ -95,5 +95,31 @@ public class VaultsRepository
       throw new Exception($"{rowsAffected} vaults were delted!");
     }
   }
+
+  internal List<Vault> GetVaultsByProfileId(string profileId, string userId)
+  {
+    string sql = @"
+        SELECT
+          accounts.*,
+          vaults.*
+        FROM
+          vaults
+        JOIN
+          accounts on accounts.id = vaults.creatorId
+        WHERE
+          accounts.id = @profileId;";
+
+    List<Vault> vaults = _db.Query<Profile, Vault, Vault>(sql, (profile, vault) =>
+    {
+      vault.CreatorId = profile.Id;
+      vault.Creator = profile;
+      return vault;
+    }, new
+    {
+      userId,
+      profileId
+    }).ToList();
+    return vaults;
+  }
 }
 

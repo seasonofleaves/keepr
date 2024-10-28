@@ -1,14 +1,17 @@
 
 
+
 namespace keepr.Services;
 
 public class VaultsService
 {
-  public VaultsService(VaultsRepository repository)
+  public VaultsService(VaultsRepository repository, ProfilesService profilesService)
   {
     _repository = repository;
+    _profilesService = profilesService;
   }
   private readonly VaultsRepository _repository;
+  private readonly ProfilesService _profilesService;
 
   internal Vault CreateVault(VaultCreationDTO vaultData, Account userInfo)
   {
@@ -61,5 +64,12 @@ public class VaultsService
     }
     _repository.DeleteVault(vaultId);
     return $"{vault.Name} was deleted!";
+  }
+
+  internal List<Vault> GetVaultsByProfileId(string profileId, string userId)
+  {
+    Profile profile = _profilesService.GetProfileById(profileId, userId);
+    List<Vault> vaults = _repository.GetVaultsByProfileId(profileId, userId);
+    return vaults;
   }
 }

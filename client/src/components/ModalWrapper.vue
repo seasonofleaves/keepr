@@ -18,10 +18,4 @@ defineProps({ modalId: String })
 </template>
 
 
-<style lang="scss" scoped>
-
-.modal{
-  // --bs-modal-border-radius: 0;
-}
-
-</style>
+<style lang="scss" scoped></style>

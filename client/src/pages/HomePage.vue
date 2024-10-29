@@ -28,9 +28,6 @@ async function getAllKeeps(){
 </script>
 
 <template>
-  <ModalWrapper id="keep-details">
-    <KeepDetailsCard v-if="activeKeep" :activeKeep />
-  </ModalWrapper>
   <div class="container-fluid mt-5 mb-3">
     <section class="row">
       <div class="col-12">
@@ -72,12 +69,5 @@ async function getAllKeeps(){
 
 <style>
 
-#keep-details .modal-body{
-  padding: 0;
-}
-
-#keep-details .modal{
-  border-radius: 0;
-}
 
 </style>

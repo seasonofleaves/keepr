@@ -1,10 +1,18 @@
 <script setup>
 import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
+import ModalWrapper from './components/ModalWrapper.vue';
+import KeepDetailsCard from './components/KeepDetailsCard.vue';
+import { computed } from 'vue';
+
+const activeKeep = computed(() => AppState.activeKeep)
 
 </script>
 
 <template>
+  <ModalWrapper id="keep-details">
+    <KeepDetailsCard v-if="activeKeep" :activeKeep />
+  </ModalWrapper>
   <header>
     <Navbar />
   </header>
@@ -26,5 +34,13 @@ footer {
   display: grid;
   place-content: center;
   height: 32px;
+}
+
+#keep-details .modal-body{
+  padding: 0;
+}
+
+#keep-details .modal-content{
+  border: none;
 }
 </style>

@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import KeepCard from '@/components/KeepCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { profilesService } from '@/services/ProfilesService.js';
 import { logger } from '@/utils/Logger.js';
@@ -10,6 +11,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute()
 const profile = computed(() => AppState.activeProfile)
+const keeps = computed(() => AppState.keeps)
 
 onMounted(() => {
   getProfileById()
@@ -55,6 +57,14 @@ async function getKeepsByProfileId(){
       <div class="d-flex justify-content-center mt-5">
         <h3>{{ profile.name }}</h3>
       </div>
+    </div>
+  </section>
+</div>
+<div class="container">
+  <section class="row">
+    <h4>Keeps</h4>
+    <div v-for="keep in keeps" :key="keep.id" class="col-3">
+      <KeepCard :keep="keep" />
     </div>
   </section>
 </div>

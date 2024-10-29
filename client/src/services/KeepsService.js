@@ -8,8 +8,10 @@ class KeepsService{
   async getKeepsByProfileId(profileId) {
     const response = await api.get(`api/profiles/${profileId}/keeps`)
     logger.log('Got keeps for profile - keeps service', response.data)
+    const newKeeps = response.data.map(keepData => new Keep(keepData))
+    AppState.keeps = newKeeps
   }
-  
+
   async getKeepById(keepId) {
     const response = await api.get(`api/keeps/${keepId}`)
     // logger.log('Got keep by id', response.data)

@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { keepsService } from '@/services/KeepsService.js';
 import { profilesService } from '@/services/ProfilesService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
@@ -12,6 +13,7 @@ const profile = computed(() => AppState.activeProfile)
 
 onMounted(() => {
   getProfileById()
+  getKeepsByProfileId()
 })
 
 async function getProfileById(){
@@ -19,6 +21,17 @@ async function getProfileById(){
     const profileId = route.params.profileId
     logger.log('Id of the profile from the URL', profileId)
     await profilesService.getProfileById(profileId)
+  }
+  catch (error){
+    Pop.error(error)
+    logger.log(error)
+  }
+}
+
+async function getKeepsByProfileId(){
+  try {
+    const profileId = route.params.profileId
+    await keepsService.getKeepsByProfileId(profileId)
   }
   catch (error){
     Pop.error(error)

@@ -5,6 +5,11 @@ import { AppState } from "@/AppState.js"
 import Pop from "@/utils/Pop.js"
 
 class KeepsService{
+  async getKeepsByProfileId(profileId) {
+    const response = await api.get(`api/profiles/${profileId}/keeps`)
+    logger.log('Got keeps for profile - keeps service', response.data)
+  }
+  
   async getKeepById(keepId) {
     const response = await api.get(`api/keeps/${keepId}`)
     // logger.log('Got keep by id', response.data)
@@ -22,7 +27,7 @@ class KeepsService{
 
   async createKeep(keepData) {
     const response = await api.post('api/keeps', keepData)
-    logger.log('Created keep', response.data)
+    // logger.log('Created keep', response.data)
     const newKeep = new Keep(response.data)
     AppState.keeps.push(newKeep)
     Pop.success(`You created a keep!`)
@@ -35,7 +40,7 @@ class KeepsService{
 
   async getAllKeeps() {
     const response = await api.get('api/keeps')
-    logger.log('Got all keeps - keeps service', response.data)
+    // logger.log('Got all keeps - keeps service', response.data)
     const newKeeps = response.data.map(keepData => new Keep(keepData))
     AppState.keeps = newKeeps
   }

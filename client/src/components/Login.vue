@@ -29,7 +29,7 @@ async function logout() {
         </div>
         <div class="dropdown-menu dropdown-menu-sm-end dropdown-menu-start p-0" aria-labelledby="authDropdown">
           <div class="list-group">
-            <router-link :to="{name: 'Profile', params: {profileId: account.id}}">
+            <router-link v-if="account" :to="{name: 'Profile', params: {profileId: account?.id}}">
               <div class="list-group-item dropdown-item list-group-item-action">
                 Profile Page
               </div>

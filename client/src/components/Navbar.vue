@@ -49,15 +49,16 @@ function toggleTheme() {
         </li>
         <li>
           <div class="dropdown">
-            <button class="btn text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn text-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Create
             </button>
             <div class="dropdown-menu bg-primary" aria-labelledby="dropdownMenuButton">
               <div data-bs-toggle="modal" data-bs-target="#keep-form">
-                <a class="dropdown-item" href="#">Keep</a>
+                <button class="dropdown-item">Keep</button>
               </div>
               <div data-bs-toggle="modal" data-bs-target="#vault-form">
-                <a class="dropdown-item" href="#">Vault</a>
+                <button class="dropdown-item">Vault</button>
               </div>
             </div>
           </div>
@@ -97,14 +98,14 @@ a:hover {
   }
 }
 
-.bg-primary{
+.bg-primary {
   border-color: #877A8F;
   border-width: 3px;
 }
+
 /* 
 img{
   aspect-ratio: 1/1;
   height: 50px;
 } */
-
 </style>

@@ -4,6 +4,7 @@ import { Vault } from '@/models/Vault.js';
 import { computed } from 'vue';
 
 const account = computed(() => AppState.account)
+// const activeVault = computed(() => AppState.activeVault)
 
 const props = defineProps({
   vault: {type: Vault, required: true}
@@ -13,18 +14,20 @@ const props = defineProps({
 
 
 <template>
-<div class="card text-bg-dark">
-  <img class="img-fluid" :src="props.vault.img" :alt="props.vault.name" :title="props.vault.name">
-  <div class="card-img-overlay d-flex flex-column justify-content-between">
-    <div class="d-flex justify-content-end">
-      <i v-if="props.vault.creatorId == account?.id" type="button" class="mdi mdi-close-circle text-danger fs-5"></i>
+  <router-link :to="{name: 'Vault', params: {vaultId: vault.id}}">
+    <div class="card text-bg-dark">
+      <img class="img-fluid" height="500" width="500" :src="props.vault.img" :alt="props.vault.name" :title="props.vault.name">
+      <div class="card-img-overlay d-flex flex-column justify-content-between">
+        <div class="d-flex justify-content-end">
+          <i v-if="props.vault.creatorId == account?.id" type="button" class="mdi mdi-close-circle text-danger fs-5"></i>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <p class="card-text m-0">{{ props.vault.name }}</p>
+          <i v-if="props.vault.isPrivate" class="mdi mdi-lock" title="vault is private"></i>
+        </div>
+      </div>
     </div>
-    <div class="d-flex align-items-center justify-content-between">
-      <p class="card-text m-0">{{ props.vault.name }}</p>
-      <i v-if="props.vault.isPrivate" class="mdi mdi-lock" title="vault is private"></i>
-    </div>
-  </div>
-</div>
+  </router-link>
 </template>
 
 

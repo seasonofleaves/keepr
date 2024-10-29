@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import KeepCard from '@/components/KeepCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
@@ -9,6 +10,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute()
 const activeVault = computed(() => AppState.activeVault)
+const vaultKeeps = computed(() => AppState.vaultKeeps)
 
 onMounted(() =>{
   getVaultById()
@@ -59,8 +61,21 @@ async function getKeepsInVault(){
   </section>
 </div>
 
-<!-- NOTE KEEPS -->
- 
+<!-- NOTE VAULT KEEPS -->
+<div class="container">
+  <section class="row">
+    <div class="d-flex justify-content-center">
+      <div class="col-10 mb-3">
+      <h4 class="mb-3">Keeps</h4>
+        <div class="masonry-layout">
+          <div class="masonry-item" v-for="vaultKeep in vaultKeeps" :key="vaultKeep.id">
+            <KeepCard :keep="vaultKeep" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 </template>
 
 
@@ -74,5 +89,28 @@ async function getKeepsInVault(){
 
 .cover-img-text{
   text-shadow: 1px 1px 10px rgb(0, 0, 0);
+}
+
+.masonry-layout {
+  column-count: 4;
+  column-gap: 1rem;
+  width: 100%;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .masonry-layout {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .masonry-layout {
+    column-count: 2;
+  }
 }
 </style>

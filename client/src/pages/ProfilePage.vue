@@ -62,9 +62,13 @@ async function getKeepsByProfileId(){
 </div>
 <div class="container">
   <section class="row">
-    <h4>Keeps</h4>
-    <div v-for="keep in keeps" :key="keep.id" class="col-3">
-      <KeepCard :keep="keep" />
+    <h4 class="mb-3">Keeps</h4>
+    <div class="col-12">
+      <div class="masonry-layout">
+        <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
+          <KeepCard :keep="keep" />
+        </div>
+      </div>
     </div>
   </section>
 </div>
@@ -90,4 +94,28 @@ async function getKeepsByProfileId(){
   border-style: solid;
   box-shadow:  0px 5px 10px rgb(149, 148, 148);
 }
+
+.masonry-layout {
+  column-count: 4;
+  column-gap: 1rem;
+  width: 100%;
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .masonry-layout {
+    column-count: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .masonry-layout {
+    column-count: 2;
+  }
+}
+
 </style>

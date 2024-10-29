@@ -37,7 +37,7 @@ defineProps({
                 <a class="dropdown-item" href="#">Something else here</a>
              </div>
             </div>
-            <button class="btn btn-success mx-2">save</button>
+            <button class="btn btn-success mx-2 text-light">save</button>
           </div>
           <div class="d-flex align-items-center">
             <img class="avatar shadow mx-2" :src="activeKeep.creator.picture" :alt="activeKeep.creator.name">
@@ -81,7 +81,10 @@ img{
   padding-top: 1px;
   padding-bottom: 5px;
   border-radius: 10px;
+}
 
+.container{
+background-color: #FEF6F0;
 }
 
 </style>

@@ -27,13 +27,13 @@ function toggleTheme() {
   <ModalWrapper id="vault-form">
     <VaultForm />
   </ModalWrapper>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-page px-3 shadow">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="/img/cw-logo.png" height="45" />
+        <h5 class="btn bg-info">Home</h5>
       </div>
     </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+    <button class="navbar-toggler bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
       aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -46,10 +46,10 @@ function toggleTheme() {
         </li>
         <li>
           <div class="dropdown">
-            <button class="btn text-light dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn text-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Create
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu bg-primary" aria-labelledby="dropdownMenuButton">
               <div data-bs-toggle="modal" data-bs-target="#keep-form">
                 <a class="dropdown-item" href="#">Keep</a>
               </div>
@@ -70,6 +70,7 @@ function toggleTheme() {
       <Login />
     </div>
   </nav>
+  <div class="bg-secondary p-1"></div>
 </template>
 
 <style scoped>
@@ -92,4 +93,10 @@ a:hover {
     height: 64px;
   }
 }
+
+.bg-primary{
+  border-color: #877A8F;
+  border-width: 3px;
+}
+
 </style>

@@ -31,7 +31,7 @@ async function getAllKeeps(){
   <ModalWrapper id="keep-details">
     <KeepDetailsCard v-if="activeKeep" :activeKeep />
   </ModalWrapper>
-  <div class="container-fluid mt-3 mb-3">
+  <div class="container-fluid mt-5 mb-3">
     <section class="row">
       <div class="col-12">
         <div class="masonry-layout">

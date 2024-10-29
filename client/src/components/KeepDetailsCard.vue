@@ -40,7 +40,9 @@ defineProps({
             <button class="btn btn-success mx-2 text-light">save</button>
           </div>
           <div class="d-flex align-items-center">
+          <router-link :to="{name: 'Profile', params: {profileId: activeKeep.creatorId}}" :title="`Go to ${activeKeep.creator.name}'s profile page!`">
             <img class="avatar shadow mx-2" :src="activeKeep.creator.picture" :alt="activeKeep.creator.name">
+          </router-link>
             <p class="mb-0 text-break text-wrap">{{ activeKeep.creator.name }}</p>
           </div>
           </div>

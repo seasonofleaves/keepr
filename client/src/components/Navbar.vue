@@ -27,7 +27,7 @@ function toggleTheme() {
   <ModalWrapper id="vault-form">
     <VaultForm />
   </ModalWrapper>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-page px-3 shadow">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-page px-3 shadow-sm">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <h5 class="btn bg-info">Home</h5>

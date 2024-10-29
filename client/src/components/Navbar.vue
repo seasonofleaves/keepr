@@ -28,6 +28,9 @@ function toggleTheme() {
     <VaultForm />
   </ModalWrapper>
   <nav class="navbar navbar-expand-sm navbar-dark bg-page px-3 shadow-sm">
+    <!-- <div class="">
+      <img class="" src="/src/assets/img/keepr-logo.png" alt="">
+    </div> -->
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <h5 class="btn bg-info">Home</h5>
@@ -98,5 +101,10 @@ a:hover {
   border-color: #877A8F;
   border-width: 3px;
 }
+/* 
+img{
+  aspect-ratio: 1/1;
+  height: 50px;
+} */
 
 </style>

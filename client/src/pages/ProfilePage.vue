@@ -60,6 +60,24 @@ async function getKeepsByProfileId(){
     </div>
   </section>
 </div>
+
+<!-- NOTE VAULTS -->
+<div class="container">
+  <section class="row">
+    <div class="d-flex justify-content-center">
+      <div class="col-10">
+      <h4 class="mb-3">Vaults</h4>
+        <div class="masonry-layout">
+          <!-- <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
+            <KeepCard :keep="keep" />
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- NOTE KEEPS -->
 <div class="container">
   <section class="row">
     <div class="d-flex justify-content-center">

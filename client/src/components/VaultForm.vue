@@ -11,7 +11,7 @@ const editableVaultData = ref({
   isPrivate: false,
 })
 
-async function createVault(){
+async function createVault() {
   try {
     await vaultsService.createVault(editableVaultData.value)
     editableVaultData.value = {
@@ -21,7 +21,7 @@ async function createVault(){
       isPrivate: false,
     }
   }
-  catch (error){
+  catch (error) {
     Pop.error(error)
     logger.log(error)
   }
@@ -37,20 +37,24 @@ async function createVault(){
         <h1>Add your vault</h1>
         <form @submit.prevent="createVault()">
           <div class="form-group mt-4">
-           <input v-model="editableVaultData.name" type="text" class="form-control" id="title" placeholder="Title..." minlength="5" maxlength="200" required>
+            <input v-model="editableVaultData.name" type="text" class="form-control" id="title" placeholder="Title..."
+              minlength="5" maxlength="200" required>
           </div>
           <div class="form-group mt-2">
-            <input v-model="editableVaultData.img" type="url" class="form-control" id="imgUrl" placeholder="Image URL..." minlength="100" maxlength="1000" required>
+            <input v-model="editableVaultData.img" type="url" class="form-control" id="imgUrl"
+              placeholder="Image URL..." minlength="100" maxlength="1000" required>
           </div>
           <div class="form-group mt-2">
-            <textarea v-model="editableVaultData.description" rows="8" type="text" class="form-control" id="description" placeholder="Vault Description..." minlength="5" maxlength="1000" required></textarea>
+            <textarea v-model="editableVaultData.description" rows="8" type="text" class="form-control" id="description"
+              placeholder="Vault Description..." minlength="5" maxlength="1000" required></textarea>
           </div>
           <div class="text-end mt-2">
             <label for="vault-privacy">Private Vaults can only be seen by you</label>
             <div class="form-check d-flex fs-5 justify-content-end">
-              <input type="checkbox" class="form-check-input mx-2" id="vault-privacy">
+              <input v-model="editableVaultData.isPrivate" type="checkbox" class="form-check-input mx-2"
+                id="vault-privacy">
               <label class="form-check-label" for="vault-privacy">Make Vault Private?</label>
-             </div>
+            </div>
             <button type="submit" class="btn btn-dark">Create</button>
           </div>
         </form>
@@ -61,11 +65,9 @@ async function createVault(){
 
 
 <style lang="scss" scoped>
-
-.btn{
+.btn {
   padding-top: 1px;
   padding-bottom: 5px;
   border-radius: 10px;
 }
-
 </style>

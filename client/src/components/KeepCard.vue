@@ -64,22 +64,23 @@ i{
   bottom: 15px;
   left: 10px;
 }
+
 p{
   font-weight: bold;
   text-shadow: 1px 1px 10px rgb(0, 0, 0);
 }
 
 .card{
-  // --bs-card-border-radius: unset;
+  min-height: 110px;
   border: none;
   box-shadow: 1px 1px 10px rgb(67, 67, 67);
 }
 
-img{
-  // object-fit: cover;
-  // object-position: center;
+.img-fluid{
   border-radius: 5px;
-  // border-end-start-radius: 6px;
+  min-height: 110px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .avatar {

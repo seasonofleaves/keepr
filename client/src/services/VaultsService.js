@@ -5,6 +5,14 @@ import { AppState } from "@/AppState.js"
 import Pop from "@/utils/Pop.js"
 
 class VaultsService{
+  async deleteVault(vaultId, vaultName) {
+    const response = await api.delete(`api/vaults/${vaultId}`)
+    logger.log('Deleting vault', response.data)
+    const vaultIndex = AppState.vaults.findIndex(vault => vault.id == vaultId)
+    AppState.vaults.splice(vaultIndex, 1)
+    Pop.success(`You deleted vault ${vaultName}`)
+  }
+  
   async getVaultById(vaultId) {
     AppState.activeVault = null
     const response = await api.get(`api/vaults/${vaultId}`)

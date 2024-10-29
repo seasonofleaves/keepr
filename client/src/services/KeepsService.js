@@ -3,16 +3,19 @@ import { api } from "./AxiosService.js"
 import { Keep } from "@/models/Keep.js"
 import { AppState } from "@/AppState.js"
 import Pop from "@/utils/Pop.js"
+import { VaultKeep } from "@/models/VaultKeep.js"
 
 class KeepsService{
   async getKeepsInVault(vaultId) {
     const response = await api.get(`api/vaults/${vaultId}/keeps`)
-    logger.log('Got keeps in vault - keeps service', response.data)
+    // logger.log('Got keeps in vault - keeps service', response.data)
+    const newVaultKeep = response.data.map(vaultKeepData => new VaultKeep(vaultKeepData))
+    AppState.vaultKeeps = newVaultKeep
   }
 
   async getKeepsByProfileId(profileId) {
     const response = await api.get(`api/profiles/${profileId}/keeps`)
-    logger.log('Got keeps for profile - keeps service', response.data)
+    // logger.log('Got keeps for profile - keeps service', response.data)
     const newKeeps = response.data.map(keepData => new Keep(keepData))
     AppState.keeps = newKeeps
   }

@@ -1,6 +1,7 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
+import VaultCard from '@/components/VaultCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { profilesService } from '@/services/ProfilesService.js';
 import { vaultsService } from '@/services/VaultsService.js';
@@ -13,6 +14,7 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 const profile = computed(() => AppState.activeProfile)
 const keeps = computed(() => AppState.keeps)
+const vaults = computed(() => AppState.vaults)
 
 onMounted(() => {
   getProfileById()
@@ -81,9 +83,9 @@ async function getVaultsByProfileId(){
       <div class="col-10">
       <h4 class="mb-3">Vaults</h4>
         <div class="masonry-layout">
-          <!-- <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
-            <KeepCard :keep="keep" />
-          </div> -->
+          <div class="masonry-item" v-for="vault in vaults" :key="vault.id">
+            <VaultCard :vault="vault" />
+          </div>
         </div>
       </div>
     </div>

@@ -60,6 +60,7 @@ async function getVaultsByProfileId(){
 
 
 <template>
+<!-- NOTE HEADER -->
 <div v-if="profile" class="container">
   <br>
   <section class="row justify-content-center">

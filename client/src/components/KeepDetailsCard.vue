@@ -1,9 +1,15 @@
 <script setup>
 import { Keep } from '@/models/Keep.js';
+import { Modal } from 'bootstrap';
 
 defineProps({
-  activeKeep: {type: Keep, required: true}
+  activeKeep: { type: Keep, required: true }
 })
+
+
+function closeModal() {
+  Modal.getOrCreateInstance('#keep-details').hide()
+}
 
 </script>
 
@@ -28,24 +34,27 @@ defineProps({
         <div class="col-12 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
             <div class="dropdown">
-              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Vault
-             </button>
-             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Vault
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="#">Something else here</a>
-             </div>
+              </div>
             </div>
             <button class="btn btn-success mx-2 text-light">save</button>
           </div>
           <div class="d-flex align-items-center">
-          <router-link :to="{name: 'Profile', params: {profileId: activeKeep.creatorId}}" :title="`Go to ${activeKeep.creator.name}'s profile page!`">
-            <img data-bs-dismiss="modal" class="avatar shadow mx-2" :src="activeKeep.creator.picture" :alt="activeKeep.creator.name">
-          </router-link>
+            <router-link @click="closeModal()" :to="{ name: 'Profile', params: { profileId: activeKeep.creatorId } }"
+              :title="`Go to ${activeKeep.creator.name}'s profile page!`">
+              <img data-bs-dismiss="modal" class="avatar shadow mx-2" :src="activeKeep.creator.picture"
+                :alt="activeKeep.creator.name">
+            </router-link>
             <p class="mb-0 text-break text-wrap">{{ activeKeep.creator.name }}</p>
           </div>
-          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -61,12 +70,12 @@ defineProps({
 }
 
 @media (max-width: 480px) {
-  img{
+  img {
     max-height: 50vh;
   }
 }
 
-img{
+img {
   width: 100%;
   height: 65vh;
   object-fit: cover;
@@ -75,18 +84,17 @@ img{
   border-end-start-radius: 6px;
 }
 
-.top-text{
+.top-text {
   padding-right: 10px;
 }
 
-.btn{
+.btn {
   padding-top: 1px;
   padding-bottom: 5px;
   border-radius: 10px;
 }
 
-.container{
-background-color: #FEF6F0;
+.container {
+  background-color: #FEF6F0;
 }
-
 </style>

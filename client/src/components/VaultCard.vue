@@ -4,7 +4,6 @@ import { Vault } from '@/models/Vault.js';
 import { computed } from 'vue';
 
 const account = computed(() => AppState.account)
-// const activeVault = computed(() => AppState.activeVault)
 
 const props = defineProps({
   vault: {type: Vault, required: true}

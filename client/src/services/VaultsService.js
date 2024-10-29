@@ -5,6 +5,12 @@ import { AppState } from "@/AppState.js"
 import Pop from "@/utils/Pop.js"
 
 class VaultsService{
+  async getVaultsByProfileId(profileId) {
+    const response = await api.get(`api/profiles/${profileId}/vaults`)
+    logger.log('Got vaults for profile - vaults service', response.data)
+
+  }
+
   async createVault(vaultData) {
     const response = await api.post('api/vaults', vaultData)
     logger.log('Created vault', response.data)

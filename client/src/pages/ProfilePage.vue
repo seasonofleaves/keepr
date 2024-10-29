@@ -3,6 +3,7 @@ import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { profilesService } from '@/services/ProfilesService.js';
+import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
@@ -16,6 +17,7 @@ const keeps = computed(() => AppState.keeps)
 onMounted(() => {
   getProfileById()
   getKeepsByProfileId()
+  getVaultsByProfileId()
 })
 
 async function getProfileById(){
@@ -34,6 +36,17 @@ async function getKeepsByProfileId(){
   try {
     const profileId = route.params.profileId
     await keepsService.getKeepsByProfileId(profileId)
+  }
+  catch (error){
+    Pop.error(error)
+    logger.log(error)
+  }
+}
+
+async function getVaultsByProfileId(){
+  try {
+    const profileId = route.params.profileId
+    await vaultsService.getVaultsByProfileId(profileId)
   }
   catch (error){
     Pop.error(error)

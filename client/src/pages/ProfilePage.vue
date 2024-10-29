@@ -48,7 +48,7 @@ async function getKeepsByProfileId(){
 <div v-if="profile" class="container">
   <br>
   <section class="row justify-content-center">
-    <div class="col-7 cover-img-bg align-content-end" :style="{backgroundImage:`url(${profile.coverImg})`}">
+    <div class="col-8 cover-img-bg align-content-end" :style="{backgroundImage:`url(${profile.coverImg})`}">
       <div class="d-flex justify-content-center">
         <img class="avatar" :src="profile.picture" :alt="profile.name">
       </div>
@@ -62,11 +62,13 @@ async function getKeepsByProfileId(){
 </div>
 <div class="container">
   <section class="row">
-    <h4 class="mb-3">Keeps</h4>
-    <div class="col-12">
-      <div class="masonry-layout">
-        <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
-          <KeepCard :keep="keep" />
+    <div class="d-flex justify-content-center">
+      <div class="col-10">
+      <h4 class="mb-3">Keeps</h4>
+        <div class="masonry-layout">
+          <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
+            <KeepCard :keep="keep" />
+          </div>
         </div>
       </div>
     </div>
@@ -77,7 +79,7 @@ async function getKeepsByProfileId(){
 
 <style lang="scss" scoped>
 .cover-img-bg{
-  height: 30dvh;
+  height: 40dvh;
   background-size: cover;
   background-position: center;
   border-radius: 5px;

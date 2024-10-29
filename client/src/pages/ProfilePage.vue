@@ -68,9 +68,10 @@ async function getVaultsByProfileId(){
         <img class="avatar" :src="profile.picture" :alt="profile.name">
       </div>
     </div>
-    <div class="col-12">
-      <div class="d-flex justify-content-center mt-5">
-        <h3>{{ profile.name }}</h3>
+    <div class="col-12 d-flex justify-content-center">
+      <div class="d-flex flex-column text-center mt-5">
+        <h3 class="fw-bold">{{ profile.name }}</h3>
+        <p class="">{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
       </div>
     </div>
   </section>
@@ -96,7 +97,7 @@ async function getVaultsByProfileId(){
 <div class="container">
   <section class="row">
     <div class="d-flex justify-content-center">
-      <div class="col-10">
+      <div class="col-10 mb-3">
       <h4 class="mb-3">Keeps</h4>
         <div class="masonry-layout">
           <div class="masonry-item" v-for="keep in keeps" :key="keep.id">

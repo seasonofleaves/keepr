@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from '@/AppState.js';
+import { keepsService } from '@/services/KeepsService.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
@@ -11,6 +12,7 @@ const activeVault = computed(() => AppState.activeVault)
 
 onMounted(() =>{
   getVaultById()
+  getKeepsInVault()
 })
 
 async function getVaultById(){
@@ -22,6 +24,17 @@ async function getVaultById(){
   catch (error){
     Pop.error(error)
     logger.log(error)
+  }
+}
+
+async function getKeepsInVault(){
+  try {
+   const vaultId = route.params.vaultId
+   await keepsService.getKeepsInVault(vaultId)
+  }
+  catch (error){
+   Pop.error(error)
+   logger.log
   }
 }
 
@@ -45,6 +58,9 @@ async function getVaultById(){
     </div>
   </section>
 </div>
+
+<!-- NOTE KEEPS -->
+ 
 </template>
 
 

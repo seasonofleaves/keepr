@@ -5,6 +5,11 @@ import { AppState } from "@/AppState.js"
 import Pop from "@/utils/Pop.js"
 
 class KeepsService{
+  async getKeepsInVault(vaultId) {
+    const response = await api.get(`api/vaults/${vaultId}/keeps`)
+    logger.log('Got keeps in vault - keeps service', response.data)
+  }
+
   async getKeepsByProfileId(profileId) {
     const response = await api.get(`api/profiles/${profileId}/keeps`)
     logger.log('Got keeps for profile - keeps service', response.data)

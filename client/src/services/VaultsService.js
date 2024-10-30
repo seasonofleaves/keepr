@@ -5,6 +5,12 @@ import { AppState } from "@/AppState.js"
 import Pop from "@/utils/Pop.js"
 
 class VaultsService{
+  async getMyVaults() {
+    const response = await api.get('account/vaults')
+    logger.log('My vaults????', response.data)
+    AppState.myVaults = response.data.map(vaultData => new Vault(vaultData))
+  }
+
   async deleteVault(vaultId, vaultName) {
     const response = await api.delete(`api/vaults/${vaultId}`)
     logger.log('Deleting vault', response.data)
@@ -12,7 +18,7 @@ class VaultsService{
     AppState.vaults.splice(vaultIndex, 1)
     Pop.success(`You deleted vault ${vaultName}`)
   }
-  
+
   async getVaultById(vaultId) {
     AppState.activeVault = null
     const response = await api.get(`api/vaults/${vaultId}`)
@@ -34,6 +40,7 @@ class VaultsService{
     const newVault = new Vault(response.data)
     AppState.vaults.push(newVault)
     Pop.success(`You created a new vault!`)
+    AppState.myVaults.push(newVault)
   }
 
 }

@@ -38,7 +38,7 @@ async function deleteVault() {
       <div class="card-img-overlay d-flex flex-column justify-content-end">
         <div class="d-flex align-items-center justify-content-between">
           <p class="card-text m-0">{{ props.vault.name }}</p>
-          <i v-if="props.vault.isPrivate" class="mdi mdi-lock" title="vault is private"></i>
+          <i v-if="props.vault.isPrivate" class="text-dark mdi mdi-lock" title="vault is private"></i>
         </div>
       </div>
     </router-link>
@@ -47,6 +47,15 @@ async function deleteVault() {
 
 
 <style lang="scss" scoped>
+.text-dark {
+  background-color: #F9F6FA;
+  border-radius: 50%;
+  padding-left: 4px;
+  padding-right: 4px;
+  // height: 25px;
+  // width: 25px;
+}
+
 .img-fluid {
   border-radius: 5px;
   min-height: 110px;

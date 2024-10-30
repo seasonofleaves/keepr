@@ -85,8 +85,11 @@ p{
 
 .avatar {
   vertical-align: middle;
+  aspect-ratio: 1/1;
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
 }
 </style>

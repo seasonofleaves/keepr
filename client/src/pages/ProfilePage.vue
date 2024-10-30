@@ -7,7 +7,7 @@ import { profilesService } from '@/services/ProfilesService.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
-import { computed, onMounted } from 'vue';
+import { computed, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 
@@ -16,41 +16,41 @@ const profile = computed(() => AppState.activeProfile)
 const keeps = computed(() => AppState.keeps)
 const vaults = computed(() => AppState.vaults)
 
-onMounted(() => {
+watch(() => route.params.profileId, () => {
   getProfileById()
   getKeepsByProfileId()
   getVaultsByProfileId()
-})
+}, { immediate: true })
 
-async function getProfileById(){
+async function getProfileById() {
   try {
     const profileId = route.params.profileId
     logger.log('Id of the profile from the URL', profileId)
     await profilesService.getProfileById(profileId)
   }
-  catch (error){
+  catch (error) {
     Pop.error(error)
     logger.log(error)
   }
 }
 
-async function getKeepsByProfileId(){
+async function getKeepsByProfileId() {
   try {
     const profileId = route.params.profileId
     await keepsService.getKeepsByProfileId(profileId)
   }
-  catch (error){
+  catch (error) {
     Pop.error(error)
     logger.log(error)
   }
 }
 
-async function getVaultsByProfileId(){
+async function getVaultsByProfileId() {
   try {
     const profileId = route.params.profileId
     await vaultsService.getVaultsByProfileId(profileId)
   }
-  catch (error){
+  catch (error) {
     Pop.error(error)
     logger.log(error)
   }
@@ -60,60 +60,60 @@ async function getVaultsByProfileId(){
 
 
 <template>
-<!-- NOTE HEADER -->
-<div v-if="profile" class="container">
-  <br>
-  <section class="row justify-content-center">
-    <div class="col-8 cover-img-bg align-content-end" :style="{backgroundImage:`url(${profile.coverImg})`}">
+  <!-- NOTE HEADER -->
+  <div v-if="profile" class="container">
+    <br>
+    <section class="row justify-content-center">
+      <div class="col-8 cover-img-bg align-content-end" :style="{ backgroundImage: `url(${profile.coverImg})` }">
+        <div class="d-flex justify-content-center">
+          <img class="avatar" :src="profile.picture" :alt="profile.name">
+        </div>
+      </div>
+      <div class="col-12 d-flex justify-content-center">
+        <div class="d-flex flex-column text-center mt-5">
+          <h3 class="fw-bold">{{ profile.name }}</h3>
+          <p class="">{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- NOTE VAULTS -->
+  <div class="container">
+    <section class="row">
       <div class="d-flex justify-content-center">
-        <img class="avatar" :src="profile.picture" :alt="profile.name">
-      </div>
-    </div>
-    <div class="col-12 d-flex justify-content-center">
-      <div class="d-flex flex-column text-center mt-5">
-        <h3 class="fw-bold">{{ profile.name }}</h3>
-        <p class="">{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- NOTE VAULTS -->
-<div class="container">
-  <section class="row">
-    <div class="d-flex justify-content-center">
-      <div class="col-10">
-      <h4 class="mb-3">Vaults</h4>
-        <div class="masonry-layout">
-          <div class="masonry-item" v-for="vault in vaults" :key="vault.id">
-            <VaultCard :vault="vault" />
+        <div class="col-10">
+          <h4 class="mb-3">Vaults</h4>
+          <div class="masonry-layout">
+            <div class="masonry-item" v-for="vault in vaults" :key="vault.id">
+              <VaultCard :vault="vault" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
 
-<!-- NOTE KEEPS -->
-<div class="container">
-  <section class="row">
-    <div class="d-flex justify-content-center">
-      <div class="col-10 mb-3">
-      <h4 class="mb-3">Keeps</h4>
-        <div class="masonry-layout">
-          <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
-            <KeepCard :keep="keep" />
+  <!-- NOTE KEEPS -->
+  <div class="container">
+    <section class="row">
+      <div class="d-flex justify-content-center">
+        <div class="col-10 mb-3">
+          <h4 class="mb-3">Keeps</h4>
+          <div class="masonry-layout">
+            <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
+              <KeepCard :keep="keep" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
 </template>
 
 
 <style lang="scss" scoped>
-.cover-img-bg{
+.cover-img-bg {
   height: 40dvh;
   background-size: cover;
   background-position: center;
@@ -129,7 +129,9 @@ async function getVaultsByProfileId(){
   border-width: 1px;
   border-color: #F9F6FA;
   border-style: solid;
-  box-shadow:  0px 5px 10px rgb(149, 148, 148);
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0px 5px 10px rgb(149, 148, 148);
 }
 
 .masonry-layout {
@@ -154,5 +156,4 @@ async function getVaultsByProfileId(){
     column-count: 2;
   }
 }
-
 </style>

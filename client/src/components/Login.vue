@@ -56,5 +56,7 @@ async function logout() {
   width: 40px;
   height: 40px;
   border-radius: 50% !important;
+  object-fit: cover;
+  object-position: center;
 }
 </style>

@@ -38,18 +38,18 @@ async function createVault() {
         <form @submit.prevent="createVault()">
           <div class="form-group mt-4">
             <input v-model="editableVaultData.name" type="text" class="form-control" id="title" placeholder="Title..."
-              minlength="5" maxlength="200" required>
+              minlength="5" maxlength="20" required>
           </div>
           <div class="form-group mt-2">
             <input v-model="editableVaultData.img" type="url" class="form-control" id="imgUrl"
-              placeholder="Image URL..." minlength="100" maxlength="1000" required>
+              placeholder="Image URL..." minlength="60" maxlength="1000" required>
           </div>
           <div class="form-group mt-2">
             <textarea v-model="editableVaultData.description" rows="8" type="text" class="form-control" id="description"
               placeholder="Vault Description..." minlength="5" maxlength="1000" required></textarea>
           </div>
           <div class="text-end mt-2">
-            <label for="vault-privacy">Private Vaults can only be seen by you</label>
+            <label for="vault-privacy">*Private Vaults can only be seen by you</label>
             <div class="form-check d-flex fs-5 justify-content-end">
               <input v-model="editableVaultData.isPrivate" type="checkbox" class="form-check-input mx-2"
                 id="vault-privacy">

@@ -36,11 +36,11 @@ async function createKeep() {
         <form @submit.prevent="createKeep()">
           <div class="form-group mt-4">
             <input v-model="editableKeepData.name" type="text" class="form-control" id="title" placeholder="Title..."
-              minlength="5" maxlength="200" required>
+              minlength="5" maxlength="20" required>
           </div>
           <div class="form-group mt-2">
             <input v-model="editableKeepData.img" type="url" class="form-control" id="imgUrl" placeholder="Image URL..."
-              minlength="100" maxlength="1000" required>
+              minlength="60" maxlength="1000" required>
           </div>
           <div class="form-group mt-2">
             <textarea v-model="editableKeepData.description" rows="8" type="text" class="form-control" id="description"

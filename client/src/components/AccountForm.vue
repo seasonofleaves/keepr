@@ -45,7 +45,7 @@ async function updateAccount() {
           </div>
           <div class="form-group mt-2">
             <input v-model="editableProfileData.coverImg" type="url" class="form-control" id="coverImgUrl"
-              placeholder="Cover Image URL..." minlength="100" maxlength="1000" required>
+              placeholder="Cover Image URL..." minlength="60" maxlength="1000" required>
           </div>
           <!-- //TODO - Add bio? -->
           <!-- <div class="form-group mt-2">

@@ -6,10 +6,11 @@ namespace keepr.Models;
 // INPUT MODEL
 public class KeepCreationDTO
 {
+  [MinLength(5), MaxLength(20)]
   public string Name { get; set; }
-  [MaxLength(1000)]
+  [MinLength(5), MaxLength(1000)]
   public string Description { get; set; }
-  [MaxLength(1000)]
+  [MinLength(60), MaxLength(1000)]
   public string Img { get; set; }
 }
 

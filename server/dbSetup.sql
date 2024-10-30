@@ -47,12 +47,15 @@ ALTER TABLE accounts ADD COLUMN coverImg TEXT NOT NULL;
 
 INSERT INTO vault_keeps (`vaultId`, `keepId`, `creatorId`) VALUES (2,2, '66f48ffd320bc392ffcdc633') ;
 
- SELECT
-          accounts.*,
-          keeps.*
+    SELECT
+          vault_keeps.*,
+          keeps.*,
+          accounts.*
         FROM
-          keeps
+          vault_keeps
+        JOIN
+          keeps on keeps.id = vault_keeps.keepId 
         JOIN
           accounts on accounts.id = keeps.creatorId
         WHERE
-          accounts.id = '66f3263a6fbf3fcb53702407';
+          vault_keeps.vaultId = 19;

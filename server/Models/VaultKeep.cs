@@ -14,11 +14,6 @@ public class VaultKeep : IRepoItem<int>
   public int VaultId { get; set; }
 }
 
-public class VaultKeepProfile : Profile
-{
-  public int VaultKeepId { get; set; }
-}
-
 public class KeptVaultKeep : Keep
 {
   public int VaultKeepId { get; set; }

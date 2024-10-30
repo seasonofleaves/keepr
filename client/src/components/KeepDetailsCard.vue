@@ -1,19 +1,38 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import { Keep } from '@/models/Keep.js';
+import { vaultKeepsService } from '@/services/VaultKeepsService.js';
+import { logger } from '@/utils/Logger.js';
+import Pop from '@/utils/Pop.js';
 import { Modal } from 'bootstrap';
 import { computed, ref } from 'vue';
 
 const myVaults = computed(() => AppState.myVaults)
 
 const vaultKeepData = ref({
-  vaultId: 0
+  vaultId: 0,
+  keepId: 0
 })
 
-defineProps({
+const props = defineProps({
   activeKeep: { type: Keep, required: true }
 })
 
+async function createVaultKeep() {
+  try {
+    const keepId = props.activeKeep.id
+    vaultKeepData.value.keepId = keepId
+    await vaultKeepsService.createVaultKeep(vaultKeepData.value)
+    vaultKeepData.value = {
+      vaultId: 0,
+      keepId: 0
+    }
+  }
+  catch (error) {
+    Pop.error(error)
+    logger.log(error)
+  }
+}
 
 function closeModal() {
   Modal.getOrCreateInstance('#keep-details').hide()
@@ -41,7 +60,7 @@ function closeModal() {
         </div>
         <div class="col-12 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
-            <form>
+            <form @submit.prevent="createVaultKeep()">
               <select v-model="vaultKeepData.vaultId" class="btn dropdown-toggle" aria-label="Select a Vault" required>
                 <option selected :value="0" disabled>Vault</option>
                 <option v-for="vault in myVaults" :key="vault.id" :value="vault.id">{{ vault.name }}</option>

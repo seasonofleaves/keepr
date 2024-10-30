@@ -19,13 +19,14 @@ const activeKeep = computed(() => AppState.activeKeep)
   <main>
     <router-view />
   </main>
-  <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
+  <footer class="bg-page text-dark">
+    Made with 🩸 & 💧 & 😭 by Autumn
   </footer>
 </template>
 
 <style lang="scss">
 @import '@/assets/scss/main.scss';
+
 :root {
   --main-height: calc(100vh - 32px - 64px);
 }
@@ -36,11 +37,11 @@ footer {
   height: 32px;
 }
 
-#keep-details .modal-body{
+#keep-details .modal-body {
   padding: 0;
 }
 
-#keep-details .modal-content{
+#keep-details .modal-content {
   border: none;
 }
 </style>

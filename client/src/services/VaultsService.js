@@ -16,6 +16,7 @@ class VaultsService{
     logger.log('Deleting vault', response.data)
     const vaultIndex = AppState.vaults.findIndex(vault => vault.id == vaultId)
     AppState.vaults.splice(vaultIndex, 1)
+    AppState.myVaults.splice(vaultIndex, 1)
     Pop.success(`You deleted vault ${vaultName}`)
   }
 

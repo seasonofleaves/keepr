@@ -1,6 +1,14 @@
 <script setup>
+import { AppState } from '@/AppState.js';
 import { Keep } from '@/models/Keep.js';
 import { Modal } from 'bootstrap';
+import { computed, ref } from 'vue';
+
+const myVaults = computed(() => AppState.myVaults)
+
+const vaultKeepData = ref({
+  vaultId: 0
+})
 
 defineProps({
   activeKeep: { type: Keep, required: true }
@@ -33,18 +41,13 @@ function closeModal() {
         </div>
         <div class="col-12 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
-            <div class="dropdown">
-              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Vault
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </div>
-            <button class="btn btn-success mx-2 text-light">save</button>
+            <form>
+              <select v-model="vaultKeepData.vaultId" class="btn dropdown-toggle" aria-label="Select a Vault" required>
+                <option selected :value="0" disabled>Vault</option>
+                <option v-for="vault in myVaults" :key="vault.id" :value="vault.id">{{ vault.name }}</option>
+              </select>
+              <button type="submit" class="btn btn-success mx-2 text-light">save</button>
+            </form>
           </div>
           <div class="d-flex align-items-center">
             <router-link @click="closeModal()" :to="{ name: 'Profile', params: { profileId: activeKeep.creatorId } }"
@@ -62,6 +65,11 @@ function closeModal() {
 
 
 <style lang="scss" scoped>
+select {
+  border: 0;
+  outline: none !important;
+}
+
 .avatar {
   vertical-align: middle;
   width: 40px;

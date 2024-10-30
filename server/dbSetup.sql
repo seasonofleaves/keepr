@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS vault_keeps (
     FOREIGN KEY (creatorId) REFERENCES accounts (id) ON DELETE CASCADE
 );
 
-ALTER TABLE accounts ADD COLUMN coverImg TEXT NOT NULL;
+ALTER TABLE accounts ADD COLUMN coverImg TEXT;
 
 INSERT INTO vault_keeps (`vaultId`, `keepId`, `creatorId`) VALUES (2,2, '66f48ffd320bc392ffcdc633') ;
 

@@ -5,5 +5,6 @@ export class VaultKeep extends Keep{
     super(data)
     this.vaultKeepId = data.vaultKeepId
     this.vaultId = data.vaultId
+    this.accountId = data.accountId
   }
 }

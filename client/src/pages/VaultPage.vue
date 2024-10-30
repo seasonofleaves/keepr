@@ -2,6 +2,7 @@
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
 import { keepsService } from '@/services/KeepsService.js';
+import { vaultKeepsService } from '@/services/VaultKeepsService.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
@@ -10,6 +11,7 @@ import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute()
 const router = useRouter()
+const account = computed(() => AppState.account)
 const activeVault = computed(() => AppState.activeVault)
 const vaultKeeps = computed(() => AppState.vaultKeeps)
 
@@ -44,6 +46,16 @@ async function getKeepsInVault() {
   }
 }
 
+async function deleteKeepInVault(vaultKeepId) {
+  try {
+    await vaultKeepsService.deleteKeepInVault(vaultKeepId)
+  }
+  catch (error) {
+    Pop.error(error)
+    logger.log(error)
+  }
+}
+
 </script>
 
 
@@ -74,7 +86,11 @@ async function getKeepsInVault() {
           <h4 class="mb-3">Keeps</h4>
           <div class="masonry-layout">
             <div class="masonry-item" v-for="vaultKeep in vaultKeeps" :key="vaultKeep.id">
-              <KeepCard :keep="vaultKeep" />
+              <div class="d-flex justify-content-end">
+                <KeepCard :keep="vaultKeep" />
+                <i v-if="vaultKeep.accountId == account?.id" @click.stop="deleteKeepInVault(vaultKeep.vaultKeepId)"
+                  type="button" class="mdi mdi-close-circle text-danger fs-5"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -85,6 +101,12 @@ async function getKeepsInVault() {
 
 
 <style lang="scss" scoped>
+i {
+  position: relative;
+  top: 0px;
+  right: 25px;
+}
+
 .cover-img-bg {
   height: 40dvh;
   background-size: cover;

@@ -6,37 +6,41 @@ import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute()
+const router = useRouter()
 const activeVault = computed(() => AppState.activeVault)
 const vaultKeeps = computed(() => AppState.vaultKeeps)
 
-onMounted(() =>{
+onMounted(() => {
   getVaultById()
   getKeepsInVault()
 })
 
-async function getVaultById(){
+async function getVaultById() {
   try {
     const vaultId = route.params.vaultId
     logger.log('Id of the vault from the URL', vaultId)
     await vaultsService.getVaultById(vaultId)
   }
-  catch (error){
+  catch (error) {
     Pop.error(error)
     logger.log(error)
+    if (error.response.data == "Not your vault!") {
+      router.push({ name: 'Home' })
+    }
   }
 }
 
-async function getKeepsInVault(){
+async function getKeepsInVault() {
   try {
-   const vaultId = route.params.vaultId
-   await keepsService.getKeepsInVault(vaultId)
+    const vaultId = route.params.vaultId
+    await keepsService.getKeepsInVault(vaultId)
   }
-  catch (error){
-   Pop.error(error)
-   logger.log
+  catch (error) {
+    Pop.error(error)
+    logger.log
   }
 }
 
@@ -44,50 +48,51 @@ async function getKeepsInVault(){
 
 
 <template>
-<!-- NOTE HEADER -->
-<div v-if="activeVault" class="container">
-  <br>
-  <section class="row justify-content-center">
-    <div class="col-6 d-flex flex-column cover-img-bg justify-content-end shadow" :style="{backgroundImage:`url(${activeVault.img})`}">
-      <div class="cover-img-text">
-        <div class="d-flex justify-content-center">
-          <h1 class="fw-bold text-uppercase text-light">{{ activeVault.name }}</h1>
-        </div>
-        <div class="d-flex justify-content-center mb-5">
-          <h5 class="fw-bold text-light">by {{ activeVault.creator.name }}</h5>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- NOTE VAULT KEEPS -->
-<div class="container">
-  <section class="row">
-    <div class="d-flex justify-content-center">
-      <div class="col-10 mb-3">
-      <h4 class="mb-3">Keeps</h4>
-        <div class="masonry-layout">
-          <div class="masonry-item" v-for="vaultKeep in vaultKeeps" :key="vaultKeep.id">
-            <KeepCard :keep="vaultKeep" />
+  <!-- NOTE HEADER -->
+  <div v-if="activeVault" class="container">
+    <br>
+    <section class="row justify-content-center">
+      <div class="col-6 d-flex flex-column cover-img-bg justify-content-end shadow"
+        :style="{ backgroundImage: `url(${activeVault.img})` }">
+        <div class="cover-img-text">
+          <div class="d-flex justify-content-center">
+            <h1 class="fw-bold text-uppercase text-light">{{ activeVault.name }}</h1>
+          </div>
+          <div class="d-flex justify-content-center mb-5">
+            <h5 class="fw-bold text-light">by {{ activeVault.creator.name }}</h5>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
+
+  <!-- NOTE VAULT KEEPS -->
+  <div class="container">
+    <section class="row">
+      <div class="d-flex justify-content-center">
+        <div class="col-10 mb-3">
+          <h4 class="mb-3">Keeps</h4>
+          <div class="masonry-layout">
+            <div class="masonry-item" v-for="vaultKeep in vaultKeeps" :key="vaultKeep.id">
+              <KeepCard :keep="vaultKeep" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 
 <style lang="scss" scoped>
-.cover-img-bg{
+.cover-img-bg {
   height: 40dvh;
   background-size: cover;
   background-position: center;
   border-radius: 5px;
 }
 
-.cover-img-text{
+.cover-img-text {
   text-shadow: 1px 1px 10px rgb(0, 0, 0);
 }
 

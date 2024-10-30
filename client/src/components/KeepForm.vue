@@ -10,7 +10,7 @@ const editableKeepData = ref({
   img: ''
 })
 
-async function createKeep(){
+async function createKeep() {
   try {
     await keepsService.createKeep(editableKeepData.value)
     editableKeepData.value = {
@@ -19,7 +19,7 @@ async function createKeep(){
       img: ''
     }
   }
-  catch (error){
+  catch (error) {
     Pop.error(error)
     logger.log(error)
   }
@@ -30,35 +30,36 @@ async function createKeep(){
 
 <template>
   <div class="container">
-    <div class="section row">
+    <section class="row">
       <div class="col-12">
         <h1>Add your keep</h1>
         <form @submit.prevent="createKeep()">
           <div class="form-group mt-4">
-           <input v-model="editableKeepData.name" type="text" class="form-control" id="title" placeholder="Title..." minlength="5" maxlength="200" required>
+            <input v-model="editableKeepData.name" type="text" class="form-control" id="title" placeholder="Title..."
+              minlength="5" maxlength="200" required>
           </div>
           <div class="form-group mt-2">
-            <input v-model="editableKeepData.img" type="url" class="form-control" id="imgUrl" placeholder="Image URL..." minlength="100" maxlength="1000" required>
+            <input v-model="editableKeepData.img" type="url" class="form-control" id="imgUrl" placeholder="Image URL..."
+              minlength="100" maxlength="1000" required>
           </div>
           <div class="form-group mt-2">
-            <textarea v-model="editableKeepData.description" rows="8" type="text" class="form-control" id="description" placeholder="Keep Description..." minlength="5" maxlength="1000" required></textarea>
+            <textarea v-model="editableKeepData.description" rows="8" type="text" class="form-control" id="description"
+              placeholder="Keep Description..." minlength="5" maxlength="1000" required></textarea>
           </div>
           <div class="text-end mt-2">
             <button type="submit" class="btn btn-dark">Create</button>
           </div>
         </form>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 
 <style lang="scss" scoped>
-
-.btn{
+.btn {
   padding-top: 1px;
   padding-bottom: 5px;
   border-radius: 10px;
 }
-
 </style>

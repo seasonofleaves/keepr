@@ -8,6 +8,7 @@ import { Modal } from 'bootstrap';
 import { computed, ref } from 'vue';
 
 const myVaults = computed(() => AppState.myVaults)
+const account = computed(() => AppState.account)
 
 const vaultKeepData = ref({
   vaultId: 0,
@@ -60,7 +61,7 @@ function closeModal() {
         </div>
         <div class="col-12 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
-            <form @submit.prevent="createVaultKeep()">
+            <form v-if="account" @submit.prevent="createVaultKeep()">
               <select v-model="vaultKeepData.vaultId" class="btn dropdown-toggle" aria-label="Select a Vault" required>
                 <option selected :value="0" disabled>Vault</option>
                 <option v-for="vault in myVaults" :key="vault.id" :value="vault.id">{{ vault.name }}</option>

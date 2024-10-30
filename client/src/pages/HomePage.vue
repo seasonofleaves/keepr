@@ -1,15 +1,12 @@
 <script setup>
 import { AppState } from '@/AppState.js';
 import KeepCard from '@/components/KeepCard.vue';
-import KeepDetailsCard from '@/components/KeepDetailsCard.vue';
-import ModalWrapper from '@/components/ModalWrapper.vue';
 import { keepsService } from '@/services/KeepsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, onMounted } from 'vue';
 
 const keeps = computed(() => AppState.keeps)
-const activeKeep = computed(() => AppState.activeKeep)
 
 onMounted(() => {
   getAllKeeps()
@@ -64,10 +61,5 @@ async function getAllKeeps(){
     column-count: 2;
   }
 }
-
-</style>
-
-<style>
-
 
 </style>

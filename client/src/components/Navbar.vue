@@ -1,12 +1,14 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import ModalWrapper from './ModalWrapper.vue';
 import KeepForm from './KeepForm.vue';
 import VaultForm from './VaultForm.vue';
+import { AppState } from '@/AppState.js';
 
 const theme = ref(loadState('theme') || 'light')
+const account = computed(() => AppState.account)
 
 onMounted(() => {
   document.documentElement.setAttribute('data-bs-theme', theme.value)
@@ -47,7 +49,7 @@ function toggleTheme() {
             About
           </router-link>
         </li>
-        <li>
+        <li v-if="account">
           <div class="dropdown">
             <button class="btn text-dark dropdown-toggle" type="button" id="dropdownMenuButton"
               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

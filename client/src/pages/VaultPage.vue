@@ -48,6 +48,8 @@ async function getKeepsInVault() {
 
 async function deleteKeepInVault(vaultKeepId) {
   try {
+    const wantsToDelete = await Pop.confirm(`Are you sure you want to delete this keep?`)
+    if (!wantsToDelete) return
     await vaultKeepsService.deleteKeepInVault(vaultKeepId)
   }
   catch (error) {
@@ -73,6 +75,11 @@ async function deleteKeepInVault(vaultKeepId) {
           <div class="d-flex justify-content-center mb-5">
             <h5 class="fw-bold text-light">by {{ activeVault.creator.name }}</h5>
           </div>
+        </div>
+      </div>
+      <div class="col-12 d-flex justify-content-center">
+        <div class="d-flex flex-column text-center mt-2">
+          <p class="btn btn-primary">{{ vaultKeeps.length }} Keeps</p>
         </div>
       </div>
     </section>
@@ -101,6 +108,10 @@ async function deleteKeepInVault(vaultKeepId) {
 
 
 <style lang="scss" scoped>
+.btn-primary {
+  pointer-events: none;
+}
+
 i {
   position: relative;
   top: 0px;

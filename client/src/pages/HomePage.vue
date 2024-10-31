@@ -12,11 +12,11 @@ onMounted(() => {
   getAllKeeps()
 })
 
-async function getAllKeeps(){
+async function getAllKeeps() {
   try {
     await keepsService.getAllKeeps()
   }
-  catch (error){
+  catch (error) {
     Pop.error(error)
     logger.log(error)
   }
@@ -30,7 +30,7 @@ async function getAllKeeps(){
       <div class="col-12">
         <div class="masonry-layout">
           <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
-              <KeepCard :keep />
+            <KeepCard :keep />
           </div>
         </div>
       </div>
@@ -56,10 +56,9 @@ async function getAllKeeps(){
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   .masonry-layout {
     column-count: 2;
   }
 }
-
 </style>

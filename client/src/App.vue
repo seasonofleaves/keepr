@@ -13,14 +13,13 @@ const activeKeep = computed(() => AppState.activeKeep)
   <ModalWrapper id="keep-details">
     <KeepDetailsCard v-if="activeKeep" :activeKeep />
   </ModalWrapper>
-  <header>
+  <header class="sticky-lg-top bg-light">
     <Navbar />
   </header>
   <main>
     <router-view />
   </main>
   <footer class="bg-page text-dark">
-    Made with 🩸 & 💧 & 😭 by Autumn
   </footer>
 </template>
 

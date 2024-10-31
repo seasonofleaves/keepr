@@ -76,7 +76,6 @@ function toggleTheme() {
       <Login />
     </div>
   </nav>
-  <div class="bg-secondary p-1"></div>
 </template>
 
 <style scoped>

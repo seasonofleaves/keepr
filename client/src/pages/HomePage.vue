@@ -25,6 +25,7 @@ async function getAllKeeps() {
 </script>
 
 <template>
+<div class="bg-secondary p-1"></div>
   <div class="container-fluid mt-5 mb-3">
     <section class="row">
       <div class="col-12">

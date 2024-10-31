@@ -20,6 +20,7 @@ watch(() => route.params.profileId, () => {
   getProfileById()
   getKeepsByProfileId()
   getVaultsByProfileId()
+  AppState.activeVault == null
 }, { immediate: true })
 
 async function getProfileById() {

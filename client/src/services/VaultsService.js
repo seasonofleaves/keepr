@@ -7,7 +7,7 @@ import Pop from "@/utils/Pop.js"
 class VaultsService{
   async getMyVaults() {
     const response = await api.get('account/vaults')
-    logger.log('My vaults????', response.data)
+    // logger.log('My vaults????', response.data)
     AppState.myVaults = response.data.map(vaultData => new Vault(vaultData))
   }
 
@@ -23,25 +23,25 @@ class VaultsService{
   async getVaultById(vaultId) {
     AppState.activeVault = null
     const response = await api.get(`api/vaults/${vaultId}`)
-    logger.log('Got vault - vaults service', response.data)
+    // logger.log('Got vault - vaults service', response.data)
     const newvault = new Vault(response.data)
     AppState.activeVault = newvault
   }
 
   async getVaultsByProfileId(profileId) {
     const response = await api.get(`api/profiles/${profileId}/vaults`)
-    logger.log('Got vaults for profile - vaults service', response.data)
+    // logger.log('Got vaults for profile - vaults service', response.data)
     const newVaults = response.data.map(vaultData => new Vault(vaultData))
     AppState.vaults = newVaults
   }
 
   async createVault(vaultData) {
     const response = await api.post('api/vaults', vaultData)
-    logger.log('Created vault', response.data)
+    // logger.log('Created vault', response.data)
     const newVault = new Vault(response.data)
-    AppState.vaults.push(newVault)
-    Pop.success(`You created a new vault!`)
+    if(AppState.activeProfile?.id == newVault.creatorId) AppState.vaults.push(newVault)
     AppState.myVaults.push(newVault)
+    Pop.success(`You created a new vault!`)
   }
 
 }

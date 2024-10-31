@@ -53,23 +53,24 @@ function setPlaceholder() {
     <section class="row">
       <div class="col-12 col-lg-6 p-0">
         <div class="img-style">
-          <img ref="keep-img" @error="setPlaceholder" :title="activeKeep.name" :src="activeKeep.img"
+          <img ref="keep-img" @error="setPlaceholder" :title="`Image for ${activeKeep.name}`" :src="activeKeep.img"
             :alt="activeKeep.name">
           <div class="align-self-start card-img-overlay text-end">
-            <button @click="closeModal()" title="close keep"
+            <button @click="closeModal()" title="Close keep"
               class="text-end m-1 text-bg-light ms-auto btn-close"></button>
           </div>
         </div>
       </div>
       <div class="col-12 col-lg-6 p-3 d-flex flex-column justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-          <i title="views" class="mdi mdi-eye-outline p-2 fs-5"></i><span class="top-text">{{ activeKeep.views }}</span>
-          <i title="number of times kept" class="mdi mdi-alpha-k-box-outline p-2 fs-5"></i><span>{{ activeKeep.kept
+          <i title="Views" class="mdi mdi-eye-outline p-2 fs-5"></i><span class="top-text">{{ activeKeep.views }}</span>
+          <i title="Number of times keep has been kept" class="mdi mdi-alpha-k-box-outline p-2 fs-5"></i><span>{{
+            activeKeep.kept
             }}</span>
         </div>
         <div class="d-flex flex-column align-items-center px-3">
-          <h4>{{ activeKeep.name }}</h4>
-          <p class="text-center">{{ activeKeep.description }}</p>
+          <h4 :title="activeKeep.name">{{ activeKeep.name }}</h4>
+          <p :title="activeKeep.description" class="text-center">{{ activeKeep.description }}</p>
         </div>
         <div class="col-12 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">

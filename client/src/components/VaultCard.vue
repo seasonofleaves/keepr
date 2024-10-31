@@ -33,7 +33,7 @@ function setPlaceholder() {
 
 
 <template>
-  <div class="card position-relative text-bg-dark">
+  <div :title="`Go to ${props.vault.name} page!`" class="card position-relative text-bg-dark">
     <button class="btn __delete" title="delete vault" @click="deleteVault">
       <i v-if="props.vault.creatorId == account?.id" class="mdi mdi-close-circle text-danger fs-5" />
     </button>

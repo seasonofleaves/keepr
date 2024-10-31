@@ -23,7 +23,6 @@ function toggleTheme() {
 </script>
 
 <template>
-  
   <nav class="navbar navbar-expand-sm navbar-dark bg-page px-3 shadow-sm">
     <!-- <div class="">
       <img class="" src="/src/assets/img/keepr-logo.png" alt="">

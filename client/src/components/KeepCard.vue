@@ -47,12 +47,12 @@ function setPlaceholder() {
 
 
 <template>
-  <div @click="setActiveKeep()" class="card text-bg-dark">
+  <div @click="setActiveKeep()" :title="`Click on ${props.keep.name} to see details`" class="card text-bg-dark">
     <img ref="keep-img" @error="setPlaceholder" class="img-fluid" height="500" width="500" :src="props.keep.img"
       :alt="props.keep.name" :title="props.keep.name">
     <div class="card-img-overlay d-flex flex-column justify-content-between">
       <div class="d-flex justify-content-end">
-        <i v-if="props.keep.creatorId == account?.id" @click.stop="deleteKeep()" type="button"
+        <i v-if="props.keep.creatorId == account?.id" @click.stop="deleteKeep()" title="Delete keep" type="button"
           class="mdi mdi-close-circle text-danger fs-5"></i>
       </div>
       <div class="d-flex align-items-center justify-content-between text-wrap">

@@ -66,14 +66,15 @@ async function deleteKeepInVault(vaultKeepId) {
   <div v-if="activeVault" class="container">
     <br>
     <section class="row justify-content-center">
-      <div class="col-6 d-flex flex-column cover-img-bg justify-content-end shadow"
+      <div :title="`Cover image for vault ${activeVault.name}`"
+        class="col-6 d-flex flex-column cover-img-bg justify-content-end shadow"
         :style="{ backgroundImage: `url(${activeVault.img})` }">
         <div class="cover-img-text">
           <div class="d-flex justify-content-center">
-            <h1 class="fw-bold text-uppercase text-light">{{ activeVault.name }}</h1>
+            <h1 :title="activeVault.name" class="fw-bold text-uppercase text-light">{{ activeVault.name }}</h1>
           </div>
           <div class="d-flex justify-content-center mb-5">
-            <h5 class="fw-bold text-light">by {{ activeVault.creator.name }}</h5>
+            <h5 :title="activeVault.creator.name" class="fw-bold text-light">by {{ activeVault.creator.name }}</h5>
           </div>
         </div>
       </div>
@@ -96,7 +97,8 @@ async function deleteKeepInVault(vaultKeepId) {
               <div class="d-flex justify-content-end">
                 <KeepCard :keep="vaultKeep" />
                 <i v-if="vaultKeep.accountId == account?.id" @click.stop="deleteKeepInVault(vaultKeep.vaultKeepId)"
-                  type="button" class="mdi mdi-close-circle text-danger fs-5"></i>
+                  :title="`Remove keep from vault ${activeVault.name}`" type="button"
+                  class="mdi mdi-close-circle text-danger fs-5"></i>
               </div>
             </div>
           </div>

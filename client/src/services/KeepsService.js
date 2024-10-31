@@ -39,7 +39,8 @@ class KeepsService{
     const response = await api.post('api/keeps', keepData)
     // logger.log('Created keep', response.data)
     const newKeep = new Keep(response.data)
-    AppState.keeps.push(newKeep)
+    if(AppState.activeProfile?.id == newKeep.creatorId) AppState.keeps.push(newKeep)
+    if(AppState.activeProfile == null) AppState.keeps.push(newKeep)
     Pop.success(`You created a keep!`)
   }
 

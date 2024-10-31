@@ -2,6 +2,7 @@
 import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
+import { Modal } from 'bootstrap';
 import { ref } from 'vue';
 
 const editableVaultData = ref({
@@ -25,6 +26,10 @@ async function createVault() {
     Pop.error(error)
     logger.log(error)
   }
+}
+
+function closeModal() {
+  Modal.getOrCreateInstance('#vault-form').hide()
 }
 
 </script>
@@ -55,7 +60,7 @@ async function createVault() {
                 id="vault-privacy">
               <label class="form-check-label" for="vault-privacy">Make Vault Private?</label>
             </div>
-            <button type="submit" class="btn btn-dark">Create</button>
+            <button @click="closeModal()" type="submit" class="btn btn-dark">Create</button>
           </div>
         </form>
       </div>

@@ -2,6 +2,7 @@
 import { keepsService } from '@/services/KeepsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
+import { Modal } from 'bootstrap';
 import { ref } from 'vue';
 
 const editableKeepData = ref({
@@ -23,6 +24,10 @@ async function createKeep() {
     Pop.error(error)
     logger.log(error)
   }
+}
+
+function closeModal() {
+  Modal.getOrCreateInstance('#keep-form').hide()
 }
 
 </script>
@@ -47,7 +52,7 @@ async function createKeep() {
               placeholder="Keep Description..." minlength="5" maxlength="1000" required></textarea>
           </div>
           <div class="text-end mt-2">
-            <button type="submit" class="btn btn-dark">Create</button>
+            <button @click="closeModal()" type="submit" class="btn btn-dark">Create</button>
           </div>
         </form>
       </div>

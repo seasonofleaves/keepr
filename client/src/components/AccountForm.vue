@@ -30,6 +30,7 @@ async function updateAccount() {
 
 
 <template>
+  
   <div class="container">
     <section class="row g-3">
       <div class="col-12">

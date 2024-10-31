@@ -108,8 +108,6 @@ img {
   height: 65vh;
   object-fit: cover;
   object-position: center;
-  border-start-start-radius: 6px;
-  border-end-start-radius: 6px;
 }
 
 .top-text {

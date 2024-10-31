@@ -5,9 +5,10 @@ import { keepsService } from '@/services/KeepsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { Modal } from 'bootstrap';
-import { computed } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 
 const account = computed(() => AppState.account)
+const img = useTemplateRef('keep-img')
 
 const props = defineProps({
   keep: { type: Keep, required: true }
@@ -37,13 +38,18 @@ async function deleteKeep() {
     logger.log(error)
   }
 }
+
+function setPlaceholder() {
+  img.value.setAttribute('src', '/src/assets/img/no-image-placeholder-bg-text.png')
+}
+
 </script>
 
 
 <template>
   <div @click="setActiveKeep()" class="card text-bg-dark">
-    <img class="img-fluid" height="500" width="500" :src="props.keep.img" :alt="props.keep.name"
-      :title="props.keep.name">
+    <img ref="keep-img" @error="setPlaceholder" class="img-fluid" height="500" width="500" :src="props.keep.img"
+      :alt="props.keep.name" :title="props.keep.name">
     <div class="card-img-overlay d-flex flex-column justify-content-between">
       <div class="d-flex justify-content-end">
         <i v-if="props.keep.creatorId == account?.id" @click.stop="deleteKeep()" type="button"

@@ -5,7 +5,7 @@ import { vaultKeepsService } from '@/services/VaultKeepsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { Modal } from 'bootstrap';
-import { computed, ref } from 'vue';
+import { computed, ref, useTemplateRef } from 'vue';
 
 const myVaults = computed(() => AppState.myVaults)
 const account = computed(() => AppState.account)
@@ -18,6 +18,8 @@ const vaultKeepData = ref({
 const props = defineProps({
   activeKeep: { type: Keep, required: true }
 })
+
+const img = useTemplateRef('keep-img')
 
 async function createVaultKeep() {
   try {
@@ -39,6 +41,10 @@ function closeModal() {
   Modal.getOrCreateInstance('#keep-details').hide()
 }
 
+function setPlaceholder() {
+  img.value.setAttribute('src', '/src/assets/img/no-image-placeholder.png')
+}
+
 </script>
 
 
@@ -47,7 +53,8 @@ function closeModal() {
     <section class="row">
       <div class="col-12 col-lg-6 p-0">
         <div class="img-style">
-          <img :title="activeKeep.name" :src="activeKeep.img" :alt="activeKeep.name">
+          <img ref="keep-img" @error="setPlaceholder" :title="activeKeep.name" :src="activeKeep.img"
+            :alt="activeKeep.name">
           <div class="align-self-start card-img-overlay text-end">
             <button @click="closeModal()" title="close keep"
               class="text-end m-1 text-bg-light ms-auto btn-close"></button>
@@ -57,7 +64,8 @@ function closeModal() {
       <div class="col-12 col-lg-6 p-3 d-flex flex-column justify-content-between align-items-center">
         <div class="d-flex align-items-center">
           <i title="views" class="mdi mdi-eye-outline p-2 fs-5"></i><span class="top-text">{{ activeKeep.views }}</span>
-          <i title="number of times kept" class="mdi mdi-alpha-k-box-outline p-2 fs-5"></i><span>{{ activeKeep.kept }}</span>
+          <i title="number of times kept" class="mdi mdi-alpha-k-box-outline p-2 fs-5"></i><span>{{ activeKeep.kept
+            }}</span>
         </div>
         <div class="d-flex flex-column align-items-center px-3">
           <h4>{{ activeKeep.name }}</h4>
@@ -66,7 +74,8 @@ function closeModal() {
         <div class="col-12 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
             <form v-if="account" @submit.prevent="createVaultKeep()">
-              <select title="select a vault" v-model="vaultKeepData.vaultId" class="btn dropdown-toggle" aria-label="Select a Vault" required>
+              <select title="select a vault" v-model="vaultKeepData.vaultId" class="btn dropdown-toggle"
+                aria-label="Select a Vault" required>
                 <option selected :value="0" disabled>Vault</option>
                 <option v-for="vault in myVaults" :key="vault.id" :value="vault.id">{{ vault.name }}</option>
               </select>

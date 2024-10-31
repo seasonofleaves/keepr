@@ -4,9 +4,10 @@ import { Vault } from '@/models/Vault.js';
 import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
-import { computed } from 'vue';
+import { computed, useTemplateRef } from 'vue';
 
 const account = computed(() => AppState.account)
+const img = useTemplateRef('vault-img')
 
 const props = defineProps({
   vault: { type: Vault, required: true }
@@ -24,6 +25,10 @@ async function deleteVault() {
   }
 }
 
+function setPlaceholder() {
+  img.value.setAttribute('src', '/src/assets/img/no-image-placeholder-bg-text.png')
+}
+
 </script>
 
 
@@ -33,8 +38,8 @@ async function deleteVault() {
       <i v-if="props.vault.creatorId == account?.id" class="mdi mdi-close-circle text-danger fs-5" />
     </button>
     <router-link class="__link" :to="{ name: 'Vault', params: { vaultId: vault.id } }">
-      <img class="img-fluid" height="500" width="500" :src="props.vault.img" :alt="props.vault.name"
-        :title="props.vault.name">
+      <img ref="vault-img" @error="setPlaceholder" class="img-fluid" height="500" width="500" :src="props.vault.img"
+        :alt="props.vault.name" :title="props.vault.name">
       <div class="card-img-overlay d-flex flex-column justify-content-end">
         <div class="d-flex align-items-center justify-content-between">
           <p class="card-text m-0">{{ props.vault.name }}</p>

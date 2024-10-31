@@ -47,13 +47,17 @@ function closeModal() {
     <section class="row">
       <div class="col-12 col-lg-6 p-0">
         <div class="img-style">
-          <img class="" :src="activeKeep.img" :alt="activeKeep.name">
+          <img :title="activeKeep.name" :src="activeKeep.img" :alt="activeKeep.name">
+          <div class="align-self-start card-img-overlay text-end">
+            <button @click="closeModal()" title="close keep"
+              class="text-end m-1 text-bg-light ms-auto btn-close"></button>
+          </div>
         </div>
       </div>
       <div class="col-12 col-lg-6 p-3 d-flex flex-column justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-          <i class="mdi mdi-eye-outline p-2 fs-5"></i><span class="top-text ">{{ activeKeep.views }}</span>
-          <i class="mdi mdi-alpha-k-box-outline p-2 fs-5"></i><span class="">{{ activeKeep.kept }}</span>
+          <i title="views" class="mdi mdi-eye-outline p-2 fs-5"></i><span class="top-text">{{ activeKeep.views }}</span>
+          <i title="number of times kept" class="mdi mdi-alpha-k-box-outline p-2 fs-5"></i><span>{{ activeKeep.kept }}</span>
         </div>
         <div class="d-flex flex-column align-items-center px-3">
           <h4>{{ activeKeep.name }}</h4>
@@ -62,11 +66,11 @@ function closeModal() {
         <div class="col-12 d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
             <form v-if="account" @submit.prevent="createVaultKeep()">
-              <select v-model="vaultKeepData.vaultId" class="btn dropdown-toggle" aria-label="Select a Vault" required>
+              <select title="select a vault" v-model="vaultKeepData.vaultId" class="btn dropdown-toggle" aria-label="Select a Vault" required>
                 <option selected :value="0" disabled>Vault</option>
                 <option v-for="vault in myVaults" :key="vault.id" :value="vault.id">{{ vault.name }}</option>
               </select>
-              <button type="submit" class="btn btn-success mx-2 text-light">save</button>
+              <button title="save to vault" type="submit" class="btn btn-success mx-2 text-light">save</button>
             </form>
           </div>
           <div class="d-flex align-items-center">
@@ -97,7 +101,7 @@ select {
   border-radius: 50%;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   img {
     max-height: 50vh;
   }

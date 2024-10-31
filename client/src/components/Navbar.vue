@@ -23,12 +23,7 @@ function toggleTheme() {
 </script>
 
 <template>
-  <ModalWrapper id="keep-form">
-    <KeepForm />
-  </ModalWrapper>
-  <ModalWrapper id="vault-form">
-    <VaultForm />
-  </ModalWrapper>
+  
   <nav class="navbar navbar-expand-sm navbar-dark bg-page px-3 shadow-sm">
     <!-- <div class="">
       <img class="" src="/src/assets/img/keepr-logo.png" alt="">

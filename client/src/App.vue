@@ -4,6 +4,8 @@ import { AppState } from './AppState.js';
 import ModalWrapper from './components/ModalWrapper.vue';
 import KeepDetailsCard from './components/KeepDetailsCard.vue';
 import { computed } from 'vue';
+import KeepForm from './components/KeepForm.vue';
+import VaultForm from './components/VaultForm.vue';
 
 const activeKeep = computed(() => AppState.activeKeep)
 
@@ -21,6 +23,12 @@ const activeKeep = computed(() => AppState.activeKeep)
   </main>
   <footer class="bg-page text-dark">
   </footer>
+  <ModalWrapper id="keep-form">
+    <KeepForm />
+  </ModalWrapper>
+  <ModalWrapper id="vault-form">
+    <VaultForm />
+  </ModalWrapper>
 </template>
 
 <style lang="scss">

@@ -82,7 +82,7 @@ async function getVaultsByProfileId() {
   <div class="container mb-3">
     <section class="row">
       <div class="d-flex justify-content-center">
-        <div class="col-10">
+        <div class="col-10 mb-3">
           <h4 class="mb-3">Vaults</h4>
           <div class="masonry-layout">
             <div class="masonry-item" v-for="vault in vaults" :key="vault.id">

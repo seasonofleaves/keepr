@@ -79,7 +79,7 @@ async function getVaultsByProfileId() {
   </div>
 
   <!-- NOTE VAULTS -->
-  <div class="container">
+  <div class="container mb-3">
     <section class="row">
       <div class="d-flex justify-content-center">
         <div class="col-10">
@@ -95,7 +95,7 @@ async function getVaultsByProfileId() {
   </div>
 
   <!-- NOTE KEEPS -->
-  <div class="container">
+  <div class="container mb-3">
     <section class="row">
       <div class="d-flex justify-content-center">
         <div class="col-10 mb-3">

@@ -29,7 +29,7 @@ function toggleTheme() {
     </div> -->
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h5 class="btn bg-info">Home</h5>
+        <h5 title="Home Page" class="btn bg-info">Home</h5>
       </div>
     </router-link>
     <button class="navbar-toggler bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -39,22 +39,23 @@ function toggleTheme() {
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-dark lighten-30 selectable text-uppercase">
+          <router-link :to="{ name: 'About' }" title="About Page"
+            class="btn text-dark lighten-30 selectable text-uppercase">
             About
           </router-link>
         </li>
         <li v-if="account">
           <div class="dropdown">
-            <button class="btn text-dark dropdown-toggle" type="button" id="dropdownMenuButton"
-              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button title="Click to create vault or keep" class="btn text-dark dropdown-toggle" type="button"
+              id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Create
             </button>
             <div class="dropdown-menu bg-primary" aria-labelledby="dropdownMenuButton">
               <div data-bs-toggle="modal" data-bs-target="#keep-form">
-                <button class="dropdown-item">Keep</button>
+                <button title="Keep" class="dropdown-item">Keep</button>
               </div>
               <div data-bs-toggle="modal" data-bs-target="#vault-form">
-                <button class="dropdown-item">Vault</button>
+                <button title="Vault" class="dropdown-item">Vault</button>
               </div>
             </div>
           </div>
@@ -62,7 +63,7 @@ function toggleTheme() {
       </ul>
       <!-- LOGIN COMPONENT HERE -->
       <div>
-        <button class="btn text-light" @click="toggleTheme"
+        <button class="btn text-success" @click="toggleTheme"
           :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
           <Icon :name="theme == 'light' ? 'weather-sunny' : 'weather-night'" />
         </button>

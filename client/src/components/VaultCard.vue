@@ -34,7 +34,7 @@ function setPlaceholder() {
 
 <template>
   <div :title="`Go to ${props.vault.name} page!`" class="card position-relative text-bg-dark">
-    <button class="btn __delete" title="delete vault" @click="deleteVault">
+    <button class="btn __delete" title="Delete vault" @click="deleteVault">
       <i v-if="props.vault.creatorId == account?.id" class="mdi mdi-close-circle text-danger fs-5" />
     </button>
     <router-link class="__link" :to="{ name: 'Vault', params: { vaultId: vault.id } }">
@@ -43,7 +43,7 @@ function setPlaceholder() {
       <div class="card-img-overlay d-flex flex-column justify-content-end">
         <div class="d-flex align-items-center justify-content-between">
           <p class="card-text m-0">{{ props.vault.name }}</p>
-          <i v-if="props.vault.isPrivate" class="text-dark mdi mdi-lock" title="vault is private"></i>
+          <i v-if="props.vault.isPrivate" class="text-dark mdi mdi-lock" title="Vault is private"></i>
         </div>
       </div>
     </router-link>

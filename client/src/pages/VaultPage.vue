@@ -74,12 +74,13 @@ async function deleteKeepInVault(vaultKeepId) {
             <h1 :title="activeVault.name" class="fw-bold text-uppercase text-light">{{ activeVault.name }}</h1>
           </div>
           <div class="d-flex justify-content-center mb-5">
-            <h5 :title="activeVault.creator.name" class="fw-bold text-light">by {{ activeVault.creator.name }}</h5>
+            <h5 :title="`By ${activeVault.creator.name}`" class="fw-bold text-light">by {{ activeVault.creator.name }}
+            </h5>
           </div>
         </div>
       </div>
       <div class="col-12 d-flex justify-content-center">
-        <div class="d-flex flex-column text-center mt-2">
+        <div :title="`${vaultKeeps.length} keeps in vault`" class="d-flex flex-column text-center mt-2">
           <p class="btn btn-primary">{{ vaultKeeps.length }} Keeps</p>
         </div>
       </div>
@@ -91,7 +92,7 @@ async function deleteKeepInVault(vaultKeepId) {
     <section class="row">
       <div class="d-flex justify-content-center">
         <div class="col-10 mb-3">
-          <h4 class="mb-3">Keeps</h4>
+          <h4 title="Keeps in vault" class="mb-3">Keeps</h4>
           <div class="masonry-layout">
             <div class="masonry-item" v-for="vaultKeep in vaultKeeps" :key="vaultKeep.id">
               <div class="d-flex justify-content-end">

@@ -61,11 +61,13 @@ function setPlaceholder() {
           </div>
         </div>
       </div>
-      <div class="col-12 col-lg-6 p-3 d-flex flex-column justify-content-between align-items-center">
+      <div class=" col-12 col-lg-6 p-3 d-flex flex-column justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-          <i title="Views" class="mdi mdi-eye-outline p-2 fs-5"></i><span class="top-text">{{ activeKeep.views }}</span>
-          <i title="Number of times keep has been kept" class="mdi mdi-alpha-k-box-outline p-2 fs-5"></i><span>{{
-            activeKeep.kept
+          <i title="Views" class="mdi mdi-eye-outline p-2 fs-5"></i><span :title="activeKeep.views" class="top-text">{{
+            activeKeep.views }}</span>
+          <i title="Number of times keep has been kept" class="mdi mdi-alpha-k-box-outline p-2 fs-5"></i><span
+            :title="activeKeep.kept">{{
+              activeKeep.kept
             }}</span>
         </div>
         <div class="d-flex flex-column align-items-center px-3">
@@ -135,6 +137,6 @@ img {
 }
 
 .container {
-  background-color: #FEF6F0;
+  background-color: -bs-var-page;
 }
 </style>

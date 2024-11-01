@@ -65,15 +65,18 @@ async function getVaultsByProfileId() {
   <div v-if="profile" class="container">
     <br>
     <section class="row justify-content-center">
-      <div class="col-8 cover-img-bg align-content-end" :style="{ backgroundImage: `url(${profile.coverImg})` }">
+      <div :title="`${profile.name}'s cover image`" class="col-8 cover-img-bg align-content-end"
+        :style="{ backgroundImage: `url(${profile.coverImg})` }">
         <div class="d-flex justify-content-center">
-          <img class="avatar" :src="profile.picture" :alt="profile.name">
+          <img :title="`${profile.name}'s profile picture`" class="avatar" :src="profile.picture" :alt="profile.name">
         </div>
       </div>
       <div class="col-12 d-flex justify-content-center">
         <div class="d-flex flex-column text-center mt-5">
-          <h3 class="fw-bold">{{ profile.name }}</h3>
-          <p class="">{{ vaults.length }} Vaults | {{ keeps.length }} Keeps</p>
+          <h3 :title="profile.name" class="fw-bold">{{ profile.name }}</h3>
+          <p><span :title="`${profile.name} has ${vaults.length} vaults`">{{ vaults.length }} Vaults</span> | <span
+              :title="`${profile.name} has ${keeps.length} keeps`">{{
+                keeps.length }} Keeps</span></p>
         </div>
       </div>
     </section>
@@ -84,7 +87,7 @@ async function getVaultsByProfileId() {
     <section class="row">
       <div class="d-flex justify-content-center">
         <div class="col-10 mb-3">
-          <h4 class="mb-3">Vaults</h4>
+          <h4 :title="`${profile.name}'s vaults`" class="mb-3">Vaults</h4>
           <div class="masonry-layout">
             <div class="masonry-item" v-for="vault in vaults" :key="vault.id">
               <VaultCard :vault="vault" />
@@ -100,7 +103,7 @@ async function getVaultsByProfileId() {
     <section class="row">
       <div class="d-flex justify-content-center">
         <div class="col-10 mb-3">
-          <h4 class="mb-3">Keeps</h4>
+          <h4 :title="`${profile.name}'s keeps`" class="mb-3">Keeps</h4>
           <div class="masonry-layout">
             <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
               <KeepCard :keep="keep" />

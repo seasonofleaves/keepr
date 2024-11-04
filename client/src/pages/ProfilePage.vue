@@ -155,7 +155,7 @@ async function getVaultsByProfileId() {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
   .masonry-layout {
     column-count: 2;
   }

@@ -86,7 +86,7 @@ async function getVaultsByProfileId() {
   <div class="container mb-3">
     <section class="row">
       <div class="d-flex justify-content-center">
-        <div class="col-10 mb-3">
+        <div class="col-12 col-md-10 mb-3">
           <h4 :title="`${profile.name}'s vaults`" class="mb-3">Vaults</h4>
           <div class="masonry-layout">
             <div class="masonry-item" v-for="vault in vaults" :key="vault.id">
@@ -102,7 +102,7 @@ async function getVaultsByProfileId() {
   <div class="container mb-3">
     <section class="row">
       <div class="d-flex justify-content-center">
-        <div class="col-10 mb-3">
+        <div class="col-12 col-md-10 mb-3">
           <h4 :title="`${profile.name}'s keeps`" class="mb-3">Keeps</h4>
           <div class="masonry-layout">
             <div class="masonry-item" v-for="keep in keeps" :key="keep.id">
@@ -149,7 +149,7 @@ async function getVaultsByProfileId() {
   margin-bottom: 1rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .masonry-layout {
     column-count: 3;
   }

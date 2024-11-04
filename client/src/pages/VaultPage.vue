@@ -91,7 +91,7 @@ async function deleteKeepInVault(vaultKeepId) {
   <div class="container">
     <section class="row">
       <div class="d-flex justify-content-center">
-        <div class="col-10 mb-3">
+        <div class="col-12 col-md-10 mb-3">
           <h4 title="Keeps in vault" class="mb-3">Keeps</h4>
           <div class="masonry-layout">
             <div class="masonry-item" v-for="vaultKeep in vaultKeeps" :key="vaultKeep.id">

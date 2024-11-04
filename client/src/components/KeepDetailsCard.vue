@@ -6,6 +6,8 @@ import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { Modal } from 'bootstrap';
 import { computed, ref, useTemplateRef } from 'vue';
+// @ts-ignore
+import placeholder from '../assets/img/no-image-placeholder-bg-text.png'
 
 const myVaults = computed(() => AppState.myVaults)
 const account = computed(() => AppState.account)
@@ -41,8 +43,15 @@ function closeModal() {
   Modal.getOrCreateInstance('#keep-details').hide()
 }
 
+//NOTE - N will stop the page from glitching (flashing) if the placeholder image doesnt import properly
+let n = 0
+
 function setPlaceholder() {
-  img.value.setAttribute('src', '/src/assets/img/no-image-placeholder.png')
+  n++
+  if (n > 3) {
+    return
+  }
+  img.value.setAttribute('src', placeholder)
 }
 
 </script>

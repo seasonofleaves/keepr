@@ -26,8 +26,14 @@ async function deleteVault() {
     logger.log(error)
   }
 }
+//NOTE - N will stop the page from glitching (flashing) if the placeholder image doesnt import properly
+let n = 0
 
 function setPlaceholder() {
+  n++
+  if (n > 3) {
+    return
+  }
   img.value.setAttribute('src', placeholder)
 }
 

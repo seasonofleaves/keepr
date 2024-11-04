@@ -5,6 +5,8 @@ import { vaultsService } from '@/services/VaultsService.js';
 import { logger } from '@/utils/Logger.js';
 import Pop from '@/utils/Pop.js';
 import { computed, useTemplateRef } from 'vue';
+// @ts-ignore
+import placeholder from '../assets/img/no-image-placeholder-bg-text.png'
 
 const account = computed(() => AppState.account)
 const img = useTemplateRef('vault-img')
@@ -26,7 +28,7 @@ async function deleteVault() {
 }
 
 function setPlaceholder() {
-  img.value.setAttribute('src', '/src/assets/img/no-image-placeholder-bg-text.png')
+  img.value.setAttribute('src', placeholder)
 }
 
 </script>

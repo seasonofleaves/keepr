@@ -48,15 +48,15 @@ function setPlaceholder() {
 
 <template>
   <div @click="setActiveKeep()" :title="`Click on ${props.keep.name} to see details`" class="card text-bg-dark">
-    <img ref="keep-img" @error="setPlaceholder" class="img-fluid" height="500" width="500"
-      :src="props.keep.img" :alt="props.keep.name">
+    <img ref="keep-img" @error="setPlaceholder" class="img-fluid" height="500" width="500" :src="props.keep.img"
+      :alt="props.keep.name">
     <div class="card-img-overlay d-flex flex-column justify-content-between">
       <div class="d-flex justify-content-end">
         <i v-if="props.keep.creatorId == account?.id" @click.stop="deleteKeep()" title="Delete keep" type="button"
           class="mdi mdi-close-circle text-danger fs-5"></i>
       </div>
       <div class="d-flex align-items-center justify-content-between text-wrap">
-        <p class="card-text fs-5 m-0">{{ props.keep.name }}</p>
+        <p class="card-text">{{ props.keep.name }}</p>
         <img class="avatar shadow" :title="props.keep.creator.name" :src="props.keep.creator.picture"
           :alt="props.keep.creator.name">
       </div>
@@ -76,6 +76,8 @@ i {
 p {
   font-weight: bold;
   text-shadow: 1px 1px 10px rgb(0, 0, 0);
+  margin-right: 1rem;
+  margin-bottom: 0;
 }
 
 .card {
@@ -99,5 +101,17 @@ p {
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+}
+
+@media (min-width: 768px) {
+  p {
+    font-size: medium;
+  }
+}
+
+@media (max-width: 480px) {
+  p {
+    font-size: medium;
+  }
 }
 </style>

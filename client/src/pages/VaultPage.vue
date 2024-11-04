@@ -67,7 +67,7 @@ async function deleteKeepInVault(vaultKeepId) {
     <br>
     <section class="row justify-content-center">
       <div :title="`Cover image for vault ${activeVault.name}`"
-        class="col-6 d-flex flex-column cover-img-bg justify-content-end shadow"
+        class="col-11 col-lg-6 d-flex flex-column cover-img-bg justify-content-end shadow"
         :style="{ backgroundImage: `url(${activeVault.img})` }">
         <div class="cover-img-text">
           <div class="d-flex justify-content-center">
